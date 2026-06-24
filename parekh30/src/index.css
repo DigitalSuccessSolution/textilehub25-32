@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Textile Treasure Color Palette ── */
+  --color-primary: #0e6b6b;        /* Deep Teal */
+  --color-primary-light: #1a8080;  /* Medium Teal */
+  --color-primary-dark: #094f4f;   /* Dark Teal */
+  --color-accent: #c8922a;         /* Warm Gold */
+  --color-accent-light: #e0a83a;   /* Light Gold */
+  --color-sand: #f0f7f7;           /* Light Teal Tint background */
+  --color-linen: #ffffff;          /* Pure White */
+  --color-cream: #f8fefe;          /* Soft Teal-White */
+  --color-sage: #e8f4f4;           /* Very Light Teal */
+  --color-soil: #0d2626;           /* Deep Dark Teal Text */
+  --color-mist: #c8e0e0;           /* Teal border */
+  --color-stone: #4a6b6b;          /* Muted Teal Text */
+
+  /* ── Font Family ── */
+  --font-display: 'Playfair Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #ffffff;
+    color: #0d2626;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6, .display-title {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 600;
+    color: #0d2626;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  p, span, a, button, input, textarea, select, label {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f7f7;
+}
+::-webkit-scrollbar-thumb {
+  background: #0e6b6b;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #094f4f;
+}
+
+/* ── Keyframe Animations ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes weavePulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1; transform: scale(1.05); }
+}
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 200; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes expandWidth {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+@keyframes tealGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 107, 107, 0.3); }
+  50%       { box-shadow: 0 0 20px 8px rgba(14, 107, 107, 0); }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #0d2626 0%, #c8922a 40%, #0d2626 60%, #c8922a 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+.fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+.fade-in-scale { animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.float-up { animation: floatUp 3s ease-in-out infinite; }
+.gold-glow { animation: tealGlow 2.5s ease-in-out infinite; }
+.display-title { font-family: 'Playfair Display', serif !important; }
+.serif-title { font-family: 'Playfair Display', serif !important; }
+
+/* ── Announcement Ticker ── */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 28s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Navbar Active State ── */
+.nav-link-active::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #c8922a;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+/* ── Button Styles ── */
+.btn-primary {
+  background: #0e6b6b;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  border: 1.5px solid #0e6b6b;
+}
+.btn-primary:hover {
+  background: #c8922a;
+  color: #ffffff;
+  border-color: #c8922a;
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  background: #c8922a;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  border: 1.5px solid #c8922a;
+}
+.btn-accent:hover {
+  background: #0e6b6b;
+  color: #ffffff;
+  border-color: #0e6b6b;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #0e6b6b;
+  border: 1.5px solid #0e6b6b;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  background: #0e6b6b;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ── Card Hover ── */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(14, 107, 107, 0.1);
+}
+
+/* ── Custom Divider ── */
+.divider-gold {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, #0e6b6b, #c8922a);
+  border-radius: 2px;
+}
+
+/* ── Section Label ── */
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c8922a;
+}
+
+/* ── Preloader ── */
+.weave-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 1.5s ease forwards;
+}
+
+/* ── Form Inputs ── */
+.form-input {
+  width: 100%;
+  padding: 12px 0px;
+  border: none;
+  border-bottom: 2px solid rgba(200, 224, 224, 0.6);
+  background: transparent;
+  color: #0d2626;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.3s ease;
+}
+.form-input:focus {
+  border-bottom-color: #0e6b6b;
+}
+.form-input::placeholder {
+  color: #4a6b6b;
+  font-weight: 400;
+}
+
+/* ── Page Hero Banner ── */
+.page-hero {
+  background: linear-gradient(135deg, #e8f4f4 0%, #d0e8e8 60%, #b8dcdc 100%);
+  border-bottom: 1px solid #c8e0e0;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 300px; height: 100%;
+  background: radial-gradient(ellipse at right, rgba(14, 107, 107, 0.12), transparent 70%);
+}
+
+/* ── Pulse animation for WhatsApp / social ── */
+@keyframes tealPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 107, 107, 0.3); }
+  50%       { box-shadow: 0 0 0 10px rgba(14, 107, 107, 0); }
+}
+.green-pulse {
+  animation: tealPulse 2s ease-in-out infinite;
+}
+
+/* ── Category Card ── */
+.category-card {
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(14, 107, 107, 0.12);
+}
+
+/* ── Product Card ── */
+.product-card {
+  transition: all 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(14, 107, 107, 0.1);
+}

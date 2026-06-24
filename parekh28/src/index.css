@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Loom & Luxury Color Palette ── */
+  --color-primary: #745b9f;        /* Deep Lavender / Purple */
+  --color-primary-light: #8e77b4;  /* Medium Lavender */
+  --color-accent: #e37a6b;         /* Warm Coral Rose Accent */
+  --color-sand: #f3ebf7;           /* Soft Lavender background */
+  --color-linen: #fdfafd;          /* Pure Linen Cream with purple hint */
+  --color-cream: #faf8fc;          /* Warm Off-white with purple tint */
+  --color-sage: #fcf2f0;           /* Soft warm pinkish-rose background */
+  --color-terracotta: #d89487;     /* Soft Coral Rose */
+  --color-soil: #2c1e43;           /* Deep purple-tinted Dark Text */
+  --color-mist: #ebdff2;           /* Soft Lavender Border */
+  --color-stone: #66587c;          /* Muted Lavender-Grey Text */
+
+  /* ── Font Family ── */
+  --font-display: 'Playfair Display', serif;
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: #faf8fc;
+    color: #2c1e43;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6, .display-title {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 500;
+    color: #2c1e43;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  p, span, a, button, input, textarea, select, label {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #faf8fc;
+}
+::-webkit-scrollbar-thumb {
+  background: #745b9f;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5e4587;
+}
+
+/* ── Keyframe Animations ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes weavePulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1; transform: scale(1.05); }
+}
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: 200; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes expandWidth {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+@keyframes goldGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(116, 91, 159, 0.3); }
+  50%       { box-shadow: 0 0 20px 8px rgba(116, 91, 159, 0); }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #2c1e43 0%, #e37a6b 40%, #2c1e43 60%, #e37a6b 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+.fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+.fade-in-scale { animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.float-up { animation: floatUp 3s ease-in-out infinite; }
+.gold-glow { animation: goldGlow 2.5s ease-in-out infinite; }
+.display-title { font-family: 'Playfair Display', serif !important; }
+.serif-title { font-family: 'Playfair Display', serif !important; }
+
+/* ── Navbar Active State ── */
+.nav-link-active::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #e37a6b;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+/* ── Button Styles ── */
+.btn-primary {
+  background: #745b9f;
+  color: #faf8fc;
+  transition: all 0.3s ease;
+  border: 1.5px solid #745b9f;
+}
+.btn-primary:hover {
+  background: #e37a6b;
+  color: #faf8fc;
+  border-color: #e37a6b;
+  transform: translateY(-1px);
+}
+
+.btn-accent {
+  background: #e37a6b;
+  color: #faf8fc;
+  transition: all 0.3s ease;
+  border: 1.5px solid #e37a6b;
+}
+.btn-accent:hover {
+  background: #745b9f;
+  color: #faf8fc;
+  border-color: #745b9f;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #745b9f;
+  border: 1.5px solid #745b9f;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  background: #745b9f;
+  color: #faf8fc;
+  transform: translateY(-1px);
+}
+
+/* ── Card Hover ── */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(44, 30, 67, 0.08);
+}
+
+/* ── Custom Divider ── */
+.divider-gold {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, #8e77b4, #e37a6b);
+  border-radius: 2px;
+}
+
+/* ── Section Label ── */
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #e37a6b;
+}
+
+/* ── Preloader ── */
+.weave-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLine 1.5s ease forwards;
+}
+
+/* ── Form Inputs ── */
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #ebdff2;
+  background: #faf8fc;
+  color: #2c1e43;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input:focus {
+  border-color: #745b9f;
+  box-shadow: 0 0 0 3px rgba(116, 91, 159, 0.08);
+}
+.form-input::placeholder {
+  color: #8e77b4;
+  font-weight: 400;
+}
+
+/* ── Page Hero Banner ── */
+.page-hero {
+  background: linear-gradient(135deg, #f3ebf7 0%, #ebdff2 60%, #e5d6ed 100%);
+  border-bottom: 1px solid #ebdff2;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 300px; height: 100%;
+  background: radial-gradient(ellipse at right, rgba(142, 119, 180, 0.12), transparent 70%);
+}
+
+/* ── Pulse animation for WhatsApp / social ── */
+@keyframes greenPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(116, 91, 159, 0.3); }
+  50%       { box-shadow: 0 0 0 10px rgba(116, 91, 159, 0); }
+}
+.green-pulse {
+  animation: greenPulse 2s ease-in-out infinite;
+}
