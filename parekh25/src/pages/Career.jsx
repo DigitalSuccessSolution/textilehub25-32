@@ -12,10 +12,10 @@ const C = {
 };
 
 const jobs = [
-  { id: 1, title: 'Retail Operations Manager', location: 'Mumbai, India', type: 'Full-time', experience: '5-8 Years', description: 'Oversee daily store operations, manage staff, and ensure a premium customer experience across our flagship retail outlets.' },
-  { id: 2, title: 'Senior Fabric Technologist', location: 'Surat, India', type: 'Full-time', experience: '7+ Years', description: 'Lead quality control for incoming fabrics, develop new textile blends, and maintain our high standards of material excellence.' },
-  { id: 3, title: 'B2B Sales Executive', location: 'Delhi, India', type: 'Full-time', experience: '2-4 Years', description: 'Expand our wholesale network, acquire new B2B accounts, and maintain strong relationships with our key clients.' },
-  { id: 4, title: 'Digital Marketing Specialist', location: 'Remote', type: 'Full-time', experience: '3+ Years', description: 'Drive our online presence, manage social media campaigns, and optimize e-commerce conversion rates.' },
+  { id: 1, title: 'Retail Operations Manager', location: 'Mumbai, India', salary: '₹8,00,000 - ₹12,00,000 PA', description: 'Oversee daily store operations, manage staff, and ensure a premium customer experience across our flagship retail outlets.' },
+  { id: 2, title: 'Senior Fabric Technologist', location: 'Surat, India', salary: '₹9,00,000 - ₹14,00,000 PA', description: 'Lead quality control for incoming fabrics, develop new textile blends, and maintain our high standards of material excellence.' },
+  { id: 3, title: 'B2B Sales Executive', location: 'Delhi, India', salary: '₹5,00,000 - ₹8,00,000 PA', description: 'Expand our wholesale network, acquire new B2B accounts, and maintain strong relationships with our key clients.' },
+  { id: 4, title: 'Digital Marketing Specialist', location: 'Remote', salary: '₹6,00,000 - ₹10,00,000 PA', description: 'Drive our online presence, manage social media campaigns, and optimize e-commerce conversion rates.' },
 ];
 
 export default function Career() {
@@ -57,7 +57,7 @@ export default function Career() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 14 }}>
                   {[
                     { icon: MapPin, val: job.location },
-                    { icon: Briefcase, val: `${job.type} · ${job.experience}` },
+                    { icon: Briefcase, val: job.salary },
                     { icon: Clock, val: 'Apply by June 30, 2026' },
                   ].map(({ icon: Icon, val }) => (
                     <div key={val} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: C.stone, fontWeight: 400 }}>

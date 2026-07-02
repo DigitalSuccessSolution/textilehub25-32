@@ -23,8 +23,8 @@ const footerLinks = {
     { name: 'e-Quotation', path: '/e-quotation' },
     { name: 'e-Auction', path: '/e-auction' },
     { name: 'Trade Circular', path: '/trade-circular' },
-    { name: 'Retail Management', path: '/retail-management' },
-    { name: 'Media Gallery', path: '/gallery' },
+    { name: 'Our Retail Management', path: '/retail-management' },
+    { name: 'Business Media Gallery', path: '/gallery' },
   ],
   Resources: [
     { name: 'Blog', path: '/blog' },
@@ -44,7 +44,7 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="max-w-[90rem] mx-auto px-6 lg:px-14 py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
 
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2">
@@ -164,23 +164,10 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="max-w-[90rem] mx-auto px-6 lg:px-14 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-[90rem] mx-auto px-6 lg:px-14 py-5 flex items-center justify-center text-center">
           <p style={{ fontSize: 12, color: C.textFaint, margin: 0, fontWeight: 400 }}>
             © 2026 Textile Paradise · All Rights Reserved
           </p>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {['Privacy Policy', 'Terms of Service', 'Sitemap'].map(txt => (
-              <a
-                key={txt}
-                href="#"
-                style={{ fontSize: 11, color: C.textFaint, textDecoration: 'none', fontWeight: 400, letterSpacing: '0.05em' }}
-                onMouseEnter={e => e.currentTarget.style.color = C.primaryLight}
-                onMouseLeave={e => e.currentTarget.style.color = C.textFaint}
-              >
-                {txt}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

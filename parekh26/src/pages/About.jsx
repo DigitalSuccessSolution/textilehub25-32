@@ -21,10 +21,10 @@ export default function About() {
       
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 text-left pt-32 pb-24">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 text-left pt-24 lg:pt-32 pb-16 lg:pb-24">
 
         {/* Page Title Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 lg:mb-12">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 40px)', fontWeight: 500, color: C.soil, margin: '0 0 10px' }}>
             About Texmart
           </h1>

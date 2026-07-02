@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  ArrowRight, ChevronLeft, ChevronRight, Leaf, Award, 
-  Truck, Layers, Tag, Headphones, Shield, Play, 
+import {
+  ArrowRight, ArrowLeft, ChevronLeft, ChevronRight, Leaf, Award,
+  Truck, Layers, Tag, Headphones, Shield, Play,
   Calendar
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -91,11 +91,11 @@ const blogs = [
 
 // Media Gallery Images from BusinessMediaGallery page
 const galleryImages = [
-  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1561489422-45de3d015e3e?w=300&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=300&auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=300&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=60",
+  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=60",
+  "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60",
+  "https://images.pexels.com/photos/7005687/pexels-photo-7005687.jpeg",
+  "https://images.pexels.com/photos/7679877/pexels-photo-7679877.jpeg",
   "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=300&auto=format&fit=crop&q=80"
 ];
 
@@ -125,7 +125,7 @@ const heroSlides = [
     titleFirst: "Luxury Fabrics,",
     titleSecond: "Premium Designs",
     description: "A premium B2B and retail destination for heritage sarees, suiting, shirting, and luxury home furnishings.",
-    image: "/images/hero_textile_3.png",
+    image: "https://images.pexels.com/photos/28460533/pexels-photo-28460533.jpeg",
     btn1Text: "B2B Solutions",
     btn1Path: "/retail-management",
     btn2Text: "Trade Circular",
@@ -137,6 +137,18 @@ export default function Home() {
   const navigate = useNavigate();
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setItemsPerView(1);
+      else if (window.innerWidth < 1024) setItemsPerView(2);
+      else setItemsPerView(3);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -146,22 +158,28 @@ export default function Home() {
   }, []);
 
   const nextSlide = () => {
-    // With 6 items, showing exactly 3 cards, the max start index is 3 (6 - 3).
-    // So popularCollections.length - 2 is 4 (indices 0, 1, 2, 3)
-    setCarouselIndex((prev) => (prev + 1) % (popularCollections.length - 2));
+    const maxIdx = popularCollections.length - itemsPerView;
+    setCarouselIndex((prev) => (prev >= maxIdx ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCarouselIndex((prev) => (prev - 1 + (popularCollections.length - 2)) % (popularCollections.length - 2));
+    const maxIdx = popularCollections.length - itemsPerView;
+    setCarouselIndex((prev) => (prev <= 0 ? maxIdx : prev - 1));
+  };
+
+  const getCarouselTransform = () => {
+    if (itemsPerView === 1) return `calc(-${carouselIndex * 100}% - ${carouselIndex * 24}px)`;
+    if (itemsPerView === 2) return `calc(-${carouselIndex * 50}% - ${carouselIndex * 12}px)`;
+    return `calc(-${carouselIndex * 33.3333}% - ${carouselIndex * 8}px)`;
   };
 
   return (
     <div style={{ background: C.bg, fontFamily: "'DM Sans', sans-serif" }} className="w-full overflow-x-hidden">
-      
+
       {/* ── 1. HERO SECTION ── */}
       <section className="relative min-h-[580px] pt-14 pb-16 flex items-center" style={{ background: 'linear-gradient(135deg, #fdfbf7 0%, #f6f1e8 100%)' }}>
         <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
-          
+
           {/* Left Column (Text & CTAs) */}
           <div className="lg:col-span-5 order-2 lg:order-1 text-left z-10 flex flex-col justify-center min-h-[380px]">
             <AnimatePresence mode="wait">
@@ -183,12 +201,12 @@ export default function Home() {
                 <p style={{ color: C.stone }} className="text-base sm:text-lg mb-8 max-w-lg leading-relaxed font-normal">
                   {heroSlides[activeHeroSlide].description}
                 </p>
-                
+
                 {/* Buttons */}
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-row justify-center lg:justify-start gap-2 sm:gap-4 mb-8 w-full">
                   <Link
                     to={heroSlides[activeHeroSlide].btn1Path}
-                    className="px-8 py-3.5 rounded-xl font-semibold tracking-wider text-xs uppercase transition-all duration-300 shadow-sm"
+                    className="flex-1 sm:flex-none text-center px-2 sm:px-8 py-3.5 rounded-xl font-semibold tracking-wider text-[10px] sm:text-xs uppercase transition-all duration-300 shadow-sm whitespace-nowrap"
                     style={{
                       background: C.primary,
                       color: '#ffffff',
@@ -201,7 +219,7 @@ export default function Home() {
                   </Link>
                   <Link
                     to={heroSlides[activeHeroSlide].btn2Path}
-                    className="px-8 py-3.5 rounded-xl font-semibold tracking-wider text-xs uppercase transition-all duration-300"
+                    className="flex-1 sm:flex-none text-center px-2 sm:px-8 py-3.5 rounded-xl font-semibold tracking-wider text-[10px] sm:text-xs uppercase transition-all duration-300 whitespace-nowrap"
                     style={{
                       background: 'transparent',
                       color: C.accent,
@@ -222,8 +240,26 @@ export default function Home() {
               </motion.div>
             </AnimatePresence>
 
+            {/* Slider Navigation Arrows */}
+            <div className="flex justify-center lg:justify-start gap-3 mb-4">
+              <button
+                onClick={() => setActiveHeroSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm border shadow-md transition-all hover:bg-white text-stone-700 hover:text-stone-900 cursor-pointer"
+                style={{ borderColor: C.border }}
+              >
+                <ArrowLeft size={20} />
+              </button>
+              <button
+                onClick={() => setActiveHeroSlide((prev) => (prev + 1) % heroSlides.length)}
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm border shadow-md transition-all hover:bg-white text-stone-700 hover:text-stone-900 cursor-pointer"
+                style={{ borderColor: C.border }}
+              >
+                <ArrowRight size={20} />
+              </button>
+            </div>
+
             {/* Pagination Dots */}
-            <div className="flex gap-2 mt-4">
+            <div className="flex justify-center lg:justify-start gap-2">
               {heroSlides.map((_, idx) => (
                 <button
                   key={idx}
@@ -243,9 +279,9 @@ export default function Home() {
           {/* Right Column (Wavy Organic Image Slider) */}
           <div className="lg:col-span-7 order-1 lg:order-2 flex justify-center lg:justify-end relative">
             {/* Background organic shape */}
-            <div 
-              style={{ 
-                position: 'absolute', 
+            <div
+              style={{
+                position: 'absolute',
                 inset: '-10px',
                 background: 'rgba(124, 142, 118, 0.08)',
                 zIndex: 0,
@@ -253,11 +289,11 @@ export default function Home() {
               }}
               className="w-full h-full float-up"
             />
-            
+
             {/* Image Wrapper with organic border radius */}
             <div className="relative w-full max-w-[550px] aspect-[4/3] sm:aspect-square md:aspect-[5/4] z-10 flex items-center justify-center">
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   key={activeHeroSlide}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -272,29 +308,14 @@ export default function Home() {
                     height: '100%',
                   }}
                 >
-                  <img 
-                    src={heroSlides[activeHeroSlide].image} 
-                    alt="Premium Indian Textile Collections" 
+                  <img
+                    src={heroSlides[activeHeroSlide].image}
+                    alt="Premium Indian Textile Collections"
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
               </AnimatePresence>
 
-              {/* Slider Arrows */}
-              <button
-                onClick={() => setActiveHeroSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
-                className="absolute left-4 z-20 w-10 h-10 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm border shadow-md transition-all hover:bg-white text-stone-700 hover:text-stone-900 cursor-pointer"
-                style={{ borderColor: C.border }}
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button
-                onClick={() => setActiveHeroSlide((prev) => (prev + 1) % heroSlides.length)}
-                className="absolute right-4 z-20 w-10 h-10 rounded-full flex items-center justify-center bg-white/90 backdrop-blur-sm border shadow-md transition-all hover:bg-white text-stone-700 hover:text-stone-900 cursor-pointer"
-                style={{ borderColor: C.border }}
-              >
-                <ChevronRight size={20} />
-              </button>
             </div>
           </div>
 
@@ -302,16 +323,16 @@ export default function Home() {
       </section>
 
       {/* ── 2. CATEGORIES SECTION (7 Circular items, single border complete image feel) ── */}
-      <section className="py-16" style={{ background: '#ffffff' }}>
+      <section className="py-10 lg:py-16" style={{ background: '#ffffff' }}>
         <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14">
-          
+
           {/* Header Row */}
           <div className="flex justify-between items-baseline mb-8 border-b pb-4" style={{ borderColor: C.border }}>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 500, color: C.soil }} className="margin-0">
               Shop By Category
             </h2>
-            <Link 
-              to="/products" 
+            <Link
+              to="/products"
               style={{ color: C.accent, fontSize: 13, fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4, textDecoration: 'none' }}
               className="hover:underline transition-all"
             >
@@ -321,20 +342,20 @@ export default function Home() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-6 justify-center">
             {categoriesList.map((cat, i) => (
-              <div 
-                key={cat.name} 
+              <div
+                key={cat.name}
                 className="flex flex-col items-center text-center cursor-pointer group"
                 onClick={() => navigate(cat.path)}
               >
                 {/* Single complete circular image - no double borders */}
-                <div 
+                <div
                   style={{ borderColor: C.border }}
                   className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden shadow-md border-2 transition-all duration-300 group-hover:scale-105"
                 >
-                  <img 
-                    src={cat.image} 
-                    alt={cat.name} 
-                    className="w-full h-full object-cover" 
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
@@ -381,16 +402,24 @@ export default function Home() {
       </section>
 
       {/* ── 4. FEATURES GRID ── */}
-      <section className="py-16">
+      <section className="py-10 lg:py-16">
         <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            
+
             {/* Left Box (Double Width) */}
-            <div 
-              style={{ background: '#e8eee5', border: `1px solid ${C.border}` }} 
+            <div
+              style={{ 
+                border: `1px solid ${C.border}`,
+                backgroundImage: 'url("https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600&auto=format&fit=crop&q=80")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
               className="lg:col-span-2 rounded-2xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[320px] text-left"
             >
-              <div className="z-10 max-w-[65%]">
+              {/* Overlay for text readability */}
+              <div className="absolute inset-0 bg-[#e8eee5]/80 backdrop-blur-[1px] z-0" />
+
+              <div className="z-10 relative sm:max-w-[85%]">
                 <span style={{ color: C.primary }} className="text-[10px] font-bold tracking-[0.2em] uppercase">About Texmart ——</span>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", color: C.soil }} className="text-2xl sm:text-3xl font-bold mt-3 mb-4 leading-tight">
                   Weaving Quality into Every Moment
@@ -400,26 +429,17 @@ export default function Home() {
                 </p>
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white transition-all hover:opacity-90"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white transition-all hover:opacity-90 shadow-sm"
                   style={{ background: C.primary }}
                 >
                   Learn More About Us
                 </Link>
               </div>
-              
-              {/* Stack of Fabric Rolls Image on Right bottom */}
-              <div className="absolute right-0 bottom-0 w-[45%] h-full pointer-events-none flex items-end">
-                <img 
-                  src="https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400&auto=format&fit=crop&q=80" 
-                  alt="Fabric stack" 
-                  className="object-cover rounded-tl-3xl shadow-lg border-l-2 border-t-2 border-white max-h-[85%] w-full"
-                />
-              </div>
             </div>
 
             {/* Feature Box 1: Trade Services */}
-            <div 
-              style={{ background: '#f6f1e8', border: `1px solid ${C.border}` }} 
+            <div
+              style={{ background: '#f6f1e8', border: `1px solid ${C.border}` }}
               className="rounded-2xl p-6 flex flex-col justify-between min-h-[320px] text-left relative overflow-hidden group hover:shadow-md transition-shadow"
             >
               <div>
@@ -439,21 +459,21 @@ export default function Home() {
                   Explore Services <ArrowRight size={13} />
                 </Link>
                 <div className="mt-4 h-24 overflow-hidden rounded-t-xl">
-                  <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&auto=format&fit=crop&q=80" alt="Trade Services" className="w-full h-full object-cover grayscale opacity-45 group-hover:scale-105 transition-transform duration-500" />
+                  <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&auto=format&fit=crop&q=80" alt="Trade Services" className="w-full h-full object-cover grayscale opacity-45" />
                 </div>
               </div>
             </div>
 
             {/* Feature Box 2: E-Quotation */}
-            <div 
-              style={{ background: '#feece8', border: `1px solid ${C.border}` }} 
+            <div
+              style={{ background: '#feece8', border: `1px solid ${C.border}` }}
               className="rounded-2xl p-6 flex flex-col justify-between min-h-[320px] text-left relative overflow-hidden group hover:shadow-md transition-shadow"
             >
               <div>
                 <div style={{ background: '#ffffff' }} className="w-9 h-9 rounded-lg flex items-center justify-center text-accent shadow-sm mb-4">
                   <Tag size={15} style={{ color: C.accent }} />
                 </div>
-                <span style={{ color: C.stone }} className="text-[9px] font-bold tracking-widest uppercase">E-Quotation</span>
+                <span style={{ color: C.stone }} className="text-[9px] font-bold tracking-widest"><span style={{textTransform: 'lowercase'}}>e</span><span className="uppercase">-QUOTATION</span></span>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", color: C.soil }} className="text-[19px] font-bold mt-2 mb-2 leading-tight">
                   Get Instant Quotation
                 </h3>
@@ -466,21 +486,21 @@ export default function Home() {
                   Request Quote <ArrowRight size={13} />
                 </Link>
                 <div className="mt-4 h-24 overflow-hidden rounded-t-xl">
-                  <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&auto=format&fit=crop&q=80" alt="Quotation" className="w-full h-full object-cover grayscale opacity-45 group-hover:scale-105 transition-transform duration-500" />
+                  <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&auto=format&fit=crop&q=80" alt="Quotation" className="w-full h-full object-cover grayscale opacity-45" />
                 </div>
               </div>
             </div>
 
             {/* Feature Box 3: Live E-Auction */}
-            <div 
-              style={{ background: '#e6f0ff', border: `1px solid ${C.border}` }} 
+            <div
+              style={{ background: '#e6f0ff', border: `1px solid ${C.border}` }}
               className="rounded-2xl p-6 flex flex-col justify-between min-h-[320px] text-left relative overflow-hidden group hover:shadow-md transition-shadow"
             >
               <div>
                 <div style={{ background: '#ffffff' }} className="w-9 h-9 rounded-lg flex items-center justify-center text-blue-600 shadow-sm mb-4">
                   <Shield size={16} className="text-blue-600" />
                 </div>
-                <span style={{ color: C.stone }} className="text-[9px] font-bold tracking-widest uppercase">Live E-Auction</span>
+                <span style={{ color: C.stone }} className="text-[9px] font-bold tracking-widest uppercase">Live <span style={{textTransform: 'lowercase'}}>e</span>-AUCTION</span>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", color: C.soil }} className="text-[19px] font-bold mt-2 mb-2 leading-tight">
                   Join Live Textile Auctions
                 </h3>
@@ -493,7 +513,7 @@ export default function Home() {
                   View Auctions <ArrowRight size={13} />
                 </Link>
                 <div className="mt-4 h-24 overflow-hidden rounded-t-xl">
-                  <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400&auto=format&fit=crop&q=80" alt="Auction" className="w-full h-full object-cover grayscale opacity-45 group-hover:scale-105 transition-transform duration-500" />
+                  <img src="https://images.pexels.com/photos/37726687/pexels-photo-37726687.jpeg" alt="Auction" className="w-full h-full object-cover grayscale opacity-45" />
                 </div>
               </div>
             </div>
@@ -522,9 +542,9 @@ export default function Home() {
       </section>
 
       {/* ── 6. POPULAR COLLECTIONS CAROUSEL (3 Cards Shown at a time) ── */}
-      <section className="py-16" style={{ background: '#FAF6EF' }}>
+      <section className="py-10 lg:py-16" style={{ background: '#FAF6EF' }}>
         <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14">
-          
+
           {/* Header */}
           <div className="flex items-center justify-between mb-10">
             {/* Title with decorative lines */}
@@ -538,14 +558,14 @@ export default function Home() {
 
             {/* Arrows */}
             <div className="flex gap-2 shrink-0">
-              <button 
+              <button
                 onClick={prevSlide}
                 style={{ border: `1.5px solid ${C.border}` }}
                 className="w-10 h-10 rounded-full flex items-center justify-center text-stone bg-white transition-all hover:bg-stone-50 cursor-pointer shadow-sm"
               >
                 <ChevronLeft size={18} />
               </button>
-              <button 
+              <button
                 onClick={nextSlide}
                 style={{ border: `1.5px solid ${C.border}` }}
                 className="w-10 h-10 rounded-full flex items-center justify-center text-stone bg-white transition-all hover:bg-stone-50 cursor-pointer shadow-sm"
@@ -557,26 +577,26 @@ export default function Home() {
 
           {/* Carousel Cards container */}
           <div className="overflow-hidden w-full relative py-2">
-            <motion.div 
+            <motion.div
               className="flex gap-6 w-full"
-              animate={{ x: `-${carouselIndex * 35.2}%` }}
+              animate={{ x: getCarouselTransform() }}
               transition={{ type: 'spring', stiffness: 100, damping: 20 }}
             >
               {popularCollections.map((col, idx) => (
-                <div 
-                  key={idx} 
-                  className="w-[85%] sm:w-[46%] lg:w-[calc(33.333%-16px)] shrink-0 cursor-pointer"
+                <div
+                  key={idx}
+                  className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 cursor-pointer"
                   onClick={() => navigate('/products')}
                 >
-                  <div 
+                  <div
                     className="card-hover rounded-2xl overflow-hidden bg-white shadow-sm"
                     style={{ border: `1px solid ${C.border}` }}
                   >
                     <div className="aspect-[4/3] w-full overflow-hidden relative">
-                      <img 
-                        src={col.image} 
-                        alt={col.name} 
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
+                      <img
+                        src={col.image}
+                        alt={col.name}
+                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                       />
                     </div>
                     <div className="p-4 text-center">
@@ -591,10 +611,10 @@ export default function Home() {
       </section>
 
       {/* ── 7. LOWER MULTI-GRID SECTION (2-Column: Blog & Media Gallery) ── */}
-      <section className="py-16">
+      <section className="py-10 lg:py-16">
         <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 text-left">
-            
+
             {/* Column 1: From the Blog */}
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-stone-200 pb-3">
@@ -627,17 +647,13 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-3 gap-3">
                 {galleryImages.map((img, i) => (
-                  <Link 
-                    key={i} 
-                    to="/gallery" 
+                  <Link
+                    key={i}
+                    to="/gallery"
                     className="aspect-square rounded-xl overflow-hidden bg-stone-100 relative group cursor-pointer shadow-sm border border-stone-100 block"
                   >
                     <img src={img} alt="Gallery item" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    {(i === 0 || i === 4) && (
-                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center text-white">
-                        <Play size={14} fill="currentColor" className="opacity-95" />
-                      </div>
-                    )}
+              
                   </Link>
                 ))}
               </div>

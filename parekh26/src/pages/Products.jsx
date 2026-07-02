@@ -26,14 +26,14 @@ const allProducts = [
   { id: 102, name: "Super-Stretch Cotton Leggings", category: "Leggings", image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&auto=format&fit=crop&q=60" },
   { id: 103, name: "Handcrafted Chikankari Kurti", category: "Kurtis", image: "https://images.unsplash.com/photo-1741847639057-b51a25d42892?w=600&auto=format&fit=crop&q=60" },
   { id: 104, name: "Anarkali Embroidered Dress Suit", category: "Dress Suits", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&auto=format&fit=crop&q=60" },
-  { id: 105, name: "Luxurious Egyptian Cotton Bedsheet", category: "Bedsheets & Linen", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=60" },
+  { id: 105, name: "Luxurious Egyptian Cotton Bedsheet", category: "Bedsheets & Linen", image: "https://images.pexels.com/photos/7746574/pexels-photo-7746574.jpeg" },
   { id: 106, name: "Soft Premium Cotton Hosiery Set", category: "Hosiery Items", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&auto=format&fit=crop&q=60" },
   { id: 107, name: "Italian Wool Blend Suiting Fabric", category: "Suiting", image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&auto=format&fit=crop&q=60" },
   { id: 108, name: "Fine Egyptian Giza Cotton Shirting", category: "Shirting", image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600&auto=format&fit=crop&q=60" },
-  { id: 109, name: "Designer Georgette Lehenga Choli", category: "Formal & Ethnic Wear for Women", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=60" },
-  { id: 110, name: "Premium Silk Sherwani Set", category: "Formal & Ethnic Wear for Men", image: "https://images.unsplash.com/photo-1724856604249-ca73680262e8?w=600&auto=format&fit=crop&q=60" },
-  { id: 111, name: "Kid's Festive Cotton Dhoti Kurta", category: "Formal & Ethnic Wear for Children", image: "https://images.unsplash.com/photo-1741992556912-3b2d62461e75?w=600&auto=format&fit=crop&q=60" },
-  { id: 112, name: "Premium Velvet Upholstery Fabric", category: "Home Upholstery & Furnishing", image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&auto=format&fit=crop&q=60" },
+  { id: 109, name: "Designer Georgette Lehenga Choli", category: "Formal & Ethnic Wear for Women", image: "https://images.pexels.com/photos/16803130/pexels-photo-16803130.jpeg" },
+  { id: 110, name: "Premium Silk Sherwani Set", category: "Formal & Ethnic Wear for Men", image: "https://images.unsplash.com/photo-1724856604249-ca73680262e8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3Jvb20lMjBkcmVzc3xlbnwwfDB8MHx8fDA%3D" },
+  { id: 111, name: "Kid's Festive Cotton Dhoti Kurta", category: "Formal & Ethnic Wear for Children", image: "https://images.unsplash.com/photo-1741992556912-3b2d62461e75?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNoaWxkcmVucyUyMGNsb3RoZXN8ZW58MHwwfDB8fHww" },
+  { id: 112, name: "Premium Velvet Upholstery Fabric", category: "Home Upholstery & Furnishing", image: "https://images.pexels.com/photos/35009336/pexels-photo-35009336.jpeg" },
 ];
 
 export default function Products() {
@@ -59,16 +59,37 @@ export default function Products() {
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-24 lg:pt-32 pb-16 lg:pb-24">
 
         {/* Page Title Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 lg:mb-12">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 44px)', fontWeight: 500, color: C.soil, margin: '0 0 12px' }}>
             Explore Our Collection
           </h1>
           <div style={{ width: 44, height: 2, background: 'linear-gradient(90deg, #a3b89d, #7c8e76)', borderRadius: 2, margin: '0 auto' }} />
         </div>
   
+
+        {/* Categories row */}
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
+            {['All', ...categories].map(cat => (
+              <button 
+                key={cat} 
+                onClick={() => handleCategoryChange(cat)}
+                style={{ 
+                  padding: '6px 16px', borderRadius: 20, 
+                  background: cat === activeCategory ? C.primary : 'transparent', 
+                  color: cat === activeCategory ? 'white' : C.primary, 
+                  border: `1px solid ${C.primary}`, 
+                  fontSize: 12, cursor: 'pointer', transition: 'all 0.2s ease' 
+                }}
+              >
+                {cat === 'All' ? 'All Products' : cat}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Count row */}
         <div className="flex items-center justify-end gap-4 mb-8">
@@ -87,7 +108,7 @@ export default function Products() {
 
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -101,7 +122,7 @@ export default function Products() {
                   border: `1px solid ${C.border}`,
                 }}
               >
-                <div style={{ height: 240, overflow: 'hidden', position: 'relative' }}>
+                <div className="h-36 sm:h-60 overflow-hidden relative">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -111,20 +132,20 @@ export default function Products() {
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                   />
                 </div>
-                <div style={{ padding: '16px 18px', borderTop: `1px solid ${C.border}` }}>
-                  <span style={{
+                <div className="p-3 sm:p-4" style={{ borderTop: `1px solid ${C.border}` }}>
+                  <span className="truncate" style={{
                     fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.18em',
                     color: C.primary, fontWeight: 400, display: 'block', marginBottom: 6,
                   }}>
                     {product.category}
                   </span>
-                  <h3 style={{ fontSize: 14, fontWeight: 500, color: C.soil, margin: '0 0 12px', lineHeight: 1.4 }}>
+                  <h3 className="line-clamp-2" style={{ fontSize: 13, fontWeight: 500, color: C.soil, margin: '0 0 10px', lineHeight: 1.3 }}>
                     {product.name}
                   </h3>
                   <button
                     style={{
-                      width: '100%', padding: '9px 14px',
-                      borderRadius: 10, fontSize: 12, fontWeight: 400,
+                      width: '100%', padding: '7px 10px',
+                      borderRadius: 8, fontSize: 11, fontWeight: 500,
                       cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
                       border: `1.5px solid ${C.border}`,
                       background: 'transparent', color: C.stone,

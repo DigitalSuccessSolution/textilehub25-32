@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const C = {
@@ -12,22 +13,25 @@ const C = {
 };
 
 const posts = [
-  { title: "The Future of Sustainable Weaving", date: "June 10, 2026", category: "Innovation", author: "Priya Sharma", readTime: "5 min read", image: "https://images.unsplash.com/photo-1705412877691-70f6913aaa1e?w=600&auto=format&fit=crop&q=60" },
-  { title: "Elegance in Threads: The Fall Collection", date: "May 28, 2026", category: "Collections", author: "Rajiv Kapoor", readTime: "4 min read", image: "https://images.unsplash.com/photo-1599753931952-654e960af582?w=600&auto=format&fit=crop&q=60" },
-  { title: "Behind the Scenes: Crafting the Perfect Saree", date: "May 15, 2026", category: "Craftsmanship", author: "Ananya Patel", readTime: "6 min read", image: "https://plus.unsplash.com/premium_photo-1669977749819-d8737b4408f7?w=600&auto=format&fit=crop&q=60" },
-  { title: "Trends to Watch in Home Furnishing", date: "Apr 22, 2026", category: "Trends", author: "Neha Gupta", readTime: "4 min read", image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&auto=format&fit=crop&q=60" },
+  { title: "The Future of Sustainable Weaving", date: "June 10, 2026", category: "Innovation", author: "Priya Sharma", readTime: "5 min read", image: "https://images.unsplash.com/photo-1705412877691-70f6913aaa1e?w=600&auto=format&fit=crop&q=60", description: "Exploring the new eco-friendly methods in textile weaving that reduce carbon footprint." },
+  { title: "Elegance in Threads: The Fall Collection", date: "May 28, 2026", category: "Collections", author: "Rajiv Kapoor", readTime: "4 min read", image: "https://images.unsplash.com/photo-1599753931952-654e960af582?w=600&auto=format&fit=crop&q=60", description: "A deep dive into the color palettes and intricate patterns of our latest fall collection." },
+  { title: "Behind the Scenes: Crafting the Perfect Saree", date: "May 15, 2026", category: "Craftsmanship", author: "Ananya Patel", readTime: "6 min read", image: "https://plus.unsplash.com/premium_photo-1669977749819-d8737b4408f7?w=600&auto=format&fit=crop&q=60", description: "Discover the dedication and skill required by our artisans to create handwoven sarees." },
+  { title: "Trends to Watch in Home Furnishing", date: "Apr 22, 2026", category: "Trends", author: "Neha Gupta", readTime: "4 min read", image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&auto=format&fit=crop&q=60", description: "Highlighting the upcoming fabric trends that will dominate interior design this year." },
 ];
 
 export default function Blog() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const filteredPosts = activeCategory === "All" ? posts : posts.filter(post => post.category === activeCategory);
+
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.cream }}>
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 pt-24 lg:pt-32 pb-16 lg:pb-24">
 
         {/* Page Title Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 lg:mb-12">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 44px)', fontWeight: 500, color: C.soil, margin: '0 0 12px' }}>Blog & Insights</h1>
           <div style={{ width: 44, height: 2, background: 'linear-gradient(90deg, #a3b89d, #7c8e76)', borderRadius: 2, margin: '0 auto' }} />
         </div>
@@ -35,8 +39,23 @@ export default function Blog() {
         <p style={{ textAlign: 'center', fontSize: 14.5, color: C.stone, maxWidth: 620, margin: '0 auto 36px', lineHeight: 1.7, fontWeight: 400 }}>
           Stay updated with the latest trends in the textile industry, design inspirations, and behind-the-scenes stories of traditional handloom crafts from India.
         </p>
+
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <p style={{ fontSize: 13, color: C.stone, marginBottom: 16 }}>Explore topics based on your interest.</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
+            {['All', 'Innovation', 'Collections', 'Craftsmanship', 'Trends'].map(cat => (
+              <button 
+                key={cat} 
+                onClick={() => setActiveCategory(cat)}
+                style={{ padding: '6px 16px', borderRadius: 20, background: cat === activeCategory ? C.primary : 'transparent', color: cat === activeCategory ? 'white' : C.primary, border: `1px solid ${C.primary}`, fontSize: 12, cursor: 'pointer', transition: 'all 0.2s ease' }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {posts.map((post, idx) => (
+          {filteredPosts.map((post, idx) => (
             <motion.article
               key={idx}
               initial={{ opacity: 0, y: 20 }}
@@ -64,7 +83,8 @@ export default function Blog() {
                   onMouseLeave={e => e.currentTarget.style.color = C.soil}>
                   {post.title}
                 </h3>
-                <p style={{ fontSize: 12, color: C.stone, margin: '0 0 14px', fontWeight: 400 }}>By {post.author}</p>
+                <p style={{ fontSize: 12, color: C.stone, margin: '0 0 10px', fontWeight: 400 }}>By {post.author}</p>
+                <p style={{ fontSize: 13, color: C.stone, margin: '0 0 14px', lineHeight: 1.5 }}>{post.description}</p>
                 <div style={{ marginTop: 'auto', paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: C.primary, fontWeight: 400, cursor: 'pointer' }}>
                     Read More <ArrowRight size={13} />

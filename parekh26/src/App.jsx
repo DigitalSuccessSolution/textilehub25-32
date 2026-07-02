@@ -118,17 +118,6 @@ function WelcomePopup() {
 
               {/* Header content */}
               <div style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  background: 'rgba(255,255,255,0.15)', borderRadius: 20,
-                  padding: '4px 12px', marginBottom: 14,
-                  border: '1px solid rgba(255,255,255,0.2)',
-                }}>
-                  <Leaf size={11} color="#a3b89d" />
-                  <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#f2ebe1', fontWeight: 500 }}>
-                    Welcome Offer
-                  </span>
-                </div>
                 <h3 style={{
                   fontFamily: "'Playfair Display', serif",
                   fontSize: 26, fontWeight: 600, color: 'white',
@@ -156,33 +145,7 @@ function WelcomePopup() {
                 </span>
               </div>
 
-              {/* Offer Box */}
-              <div style={{
-                background: C.sand,
-                border: `1.5px dashed ${C.primaryLight}`,
-                borderRadius: 14,
-                padding: '16px 20px',
-                marginBottom: 22,
-                textAlign: 'center',
-              }}>
-                <span style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.2em', color: C.stone, display: 'block', marginBottom: 6, fontWeight: 400 }}>
-                  Exclusive Launch Offer
-                </span>
-                <span style={{ fontSize: 18, fontWeight: 500, color: C.primary, display: 'block', marginBottom: 8 }}>
-                  10% Off Your First Order
-                </span>
-                <div style={{
-                  background: 'white',
-                  border: `1px solid ${C.border}`,
-                  borderRadius: 8,
-                  padding: '7px 14px',
-                  display: 'inline-block',
-                }}>
-                  <span style={{ fontSize: 13, letterSpacing: '0.18em', color: C.soil, fontWeight: 600 }}>
-                    CODE: PARADISE10
-                  </span>
-                </div>
-              </div>
+
 
               {/* CTA Buttons */}
               <div style={{ display: 'flex', gap: 10 }}>

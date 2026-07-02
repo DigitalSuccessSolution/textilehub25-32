@@ -87,136 +87,88 @@ function WelcomePopup() {
               boxShadow: '0 32px 80px rgba(74,55,40,0.2)',
             }}
           >
-            {/* Decorative top band */}
-            <div style={{
-              background: `linear-gradient(135deg, ${C.soil}, ${C.primary}, #7A8C6E)`,
-              padding: '28px 32px 24px',
-              position: 'relative',
-              overflow: 'hidden',
-            }}>
-              {/* Dot pattern */}
+            {/* Top Image Header */}
+            <div style={{ position: 'relative', height: 220, overflow: 'hidden' }}>
+              <img src="/images/heroimages/hero.png" alt="Welcome to Textile Paradise" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{
                 position: 'absolute', inset: 0,
-                backgroundImage: 'radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
-                backgroundSize: '20px 20px',
+                background: 'linear-gradient(to top, rgba(74,55,40,0.9) 0%, rgba(74,55,40,0.1) 100%)'
               }} />
-
+              
               {/* Close button */}
               <button
                 onClick={() => setIsOpen(false)}
                 style={{
-                  position: 'absolute', top: 14, right: 14,
+                  position: 'absolute', top: 16, right: 16,
                   width: 32, height: 32, borderRadius: 50,
-                  background: 'rgba(255,255,255,0.15)',
-                  border: '1px solid rgba(255,255,255,0.2)',
+                  background: 'rgba(255,255,255,0.2)',
+                  border: '1px solid rgba(255,255,255,0.3)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'white', cursor: 'pointer', zIndex: 5,
+                  backdropFilter: 'blur(4px)',
                 }}
               >
                 <X size={15} />
               </button>
 
-              {/* Header content */}
-              <div style={{ position: 'relative', zIndex: 2 }}>
+              <div style={{ position: 'absolute', bottom: 20, left: 24, right: 24, zIndex: 2 }}>
                 <div style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6,
-                  background: 'rgba(255,255,255,0.15)', borderRadius: 20,
-                  padding: '4px 12px', marginBottom: 14,
-                  border: '1px solid rgba(255,255,255,0.2)',
+                  background: 'rgba(255,255,255,0.2)', borderRadius: 20,
+                  padding: '4px 12px', marginBottom: 10,
+                  border: '1px solid rgba(255,255,255,0.3)', backdropFilter: 'blur(4px)',
                 }}>
-                  <Leaf size={11} color="#C4A35A" />
+                  <Leaf size={11} color="#F5EDD8" />
                   <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#F5EDD8', fontWeight: 500 }}>
-                    Welcome Offer
+                    Textile Paradise
                   </span>
                 </div>
                 <h3 style={{
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: 26, fontWeight: 600, color: 'white',
-                  lineHeight: 1.2, margin: 0,
+                  fontSize: 28, fontWeight: 600, color: 'white',
+                  lineHeight: 1.15, margin: 0,
                 }}>
-                  Welcome to<br/>
-                  <span style={{ fontStyle: 'italic', color: '#F5EDD8' }}>Textile Paradise</span>
+                  Discover <br/>
+                  <span style={{ fontStyle: 'italic', color: '#C4A35A', fontWeight: 500 }}>Heritage Elegance</span>
                 </h3>
               </div>
             </div>
 
             {/* Body */}
-            <div style={{ padding: '24px 32px 28px' }}>
-              <p style={{ fontSize: 14, color: C.stone, lineHeight: 1.7, marginBottom: 22, fontWeight: 400 }}>
-                Discover India's finest collection of sarees, kurtis, suiting fabrics, bedsheets and premium artisan textiles — crafted with heritage techniques.
+            <div style={{ padding: '24px 28px 28px' }}>
+              <p style={{ fontSize: 14.5, color: C.stone, lineHeight: 1.6, marginBottom: 20, fontWeight: 400 }}>
+                Immerse yourself in India's finest collection of designer sarees, premium suiting fabrics, and luxury artisan textiles.
               </p>
 
               {/* Stars */}
-              <div style={{ display: 'flex', gap: 3, marginBottom: 20 }}>
+              <div style={{ display: 'flex', gap: 3, marginBottom: 24, alignItems: 'center' }}>
                 {[1,2,3,4,5].map(i => (
-                  <Star key={i} size={14} fill="#C4A35A" stroke="none" />
+                  <Star key={i} size={15} fill="#C4A35A" stroke="none" />
                 ))}
-                <span style={{ fontSize: 12, color: C.stone, marginLeft: 6, fontWeight: 400 }}>
-                  Trusted by 25,000+ customers
+                <span style={{ fontSize: 12, color: C.stone, marginLeft: 8, fontWeight: 500 }}>
+                  25,000+ Happy Customers
                 </span>
-              </div>
-
-              {/* Offer Box */}
-              <div style={{
-                background: C.sand,
-                border: `1.5px dashed ${C.primaryLight}`,
-                borderRadius: 14,
-                padding: '16px 20px',
-                marginBottom: 22,
-                textAlign: 'center',
-              }}>
-                <span style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.2em', color: C.stone, display: 'block', marginBottom: 6, fontWeight: 400 }}>
-                  Exclusive Launch Offer
-                </span>
-                <span style={{ fontSize: 18, fontWeight: 500, color: C.primary, display: 'block', marginBottom: 8 }}>
-                  10% Off Your First Order
-                </span>
-                <div style={{
-                  background: 'white',
-                  border: `1px solid ${C.border}`,
-                  borderRadius: 8,
-                  padding: '7px 14px',
-                  display: 'inline-block',
-                }}>
-                  <span style={{ fontSize: 13, letterSpacing: '0.18em', color: C.soil, fontWeight: 600 }}>
-                    CODE: PARADISE10
-                  </span>
-                </div>
               </div>
 
               {/* CTA Buttons */}
-              <div style={{ display: 'flex', gap: 10 }}>
+              <div style={{ display: 'flex', gap: 12 }}>
                 <button
                   onClick={() => { setIsOpen(false); navigate('/products'); }}
                   style={{
-                    flex: 1, padding: '12px 16px',
+                    flex: 1, padding: '14px 16px',
                     background: C.soil, color: 'white',
                     border: 'none', borderRadius: 12,
-                    fontSize: 13, fontWeight: 500,
+                    fontSize: 13.5, fontWeight: 500,
                     cursor: 'pointer', display: 'flex',
-                    alignItems: 'center', justifyContent: 'center', gap: 6,
+                    alignItems: 'center', justifyContent: 'center', gap: 8,
                     fontFamily: "'DM Sans', sans-serif",
                     transition: 'all 0.2s ease',
+                    boxShadow: '0 4px 12px rgba(74,55,40,0.15)'
                   }}
                   onMouseEnter={e => e.currentTarget.style.background = C.primary}
                   onMouseLeave={e => e.currentTarget.style.background = C.soil}
                 >
-                  Explore Collections <ArrowRight size={14} />
-                </button>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  style={{
-                    padding: '12px 18px',
-                    background: 'transparent',
-                    color: C.stone,
-                    border: `1px solid ${C.border}`,
-                    borderRadius: 12,
-                    fontSize: 13, fontWeight: 400,
-                    cursor: 'pointer',
-                    fontFamily: "'DM Sans', sans-serif",
-                  }}
-                >
-                  Later
+                  Explore Collections <ArrowRight size={15} />
                 </button>
               </div>
             </div>

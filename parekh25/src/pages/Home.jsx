@@ -20,28 +20,28 @@ const C = {
 const sliderSlides = [
   {
     tag: 'Heritage Handlooms',
-    title: 'Timeless Weaves for Modern Living',
+    title: <>Timeless Weaves <br className="block md:hidden" /> for Modern Living</>,
     desc: 'Experience India\'s finest sustainable fabrics, handcrafted silks, and premium textiles woven with heritage techniques.',
     image: '/images/heroimages/hero.png',
     position: 'object-top',
   },
   {
-    tag: 'Heritage Sarees',
-    title: 'Exquisite Elegance in Silk & Cotton',
+    tag: 'Heritage Kurtis',
+    title: <>Exquisite Elegance <br className="block md:hidden" /> in Silk & Cotton</>,
     desc: 'Adorn yourself with designer sarees and ethnic ensembles woven by India\'s master artisans.',
     image: '/images/heroimages/hero1.png',
     position: 'object-top',
   },
   {
-    tag: 'Royal Suiting',
-    title: 'Sophisticated Men\'s Suiting Fabrics',
+    tag: 'Royal Kids Wear',
+    title: <>Sophisticated Men's <br className="block md:hidden" /> Suiting Fabrics</>,
     desc: 'Crafted for weddings, formal affairs, and heritage celebrations with premium longevity and soft textures.',
     image: '/images/heroimages/hero2.png',
     position: 'object-center',
   },
   {
     tag: 'Luxe Home Linen',
-    title: 'Premium Linens & Bedding Collections',
+    title: <>Premium Linens & <br className="block md:hidden" /> Bedding Collections</>,
     desc: 'Transform your space with organic home textiles, designer upholstery, and luxury linen bedsheets.',
     image: '/images/heroimages/hero3.png',
     position: 'object-center',
@@ -53,7 +53,7 @@ const featuredCollections = [
     label: 'Wedding Collection',
     title: 'Bridal & Wedding Wear',
     desc: 'Exquisite sarees, lehengas and ethnic ensembles for the most special occasions.',
-    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=80',
+    image: 'https://images.pexels.com/photos/11726516/pexels-photo-11726516.jpeg',
     color: C.terracotta,
   },
   {
@@ -163,7 +163,7 @@ export default function Home() {
     <div style={{ background: C.cream, fontFamily: "'DM Sans', sans-serif" }}>
 
       {/* ── HERO SLIDER ── */}
-      <section className="relative w-full overflow-hidden" style={{ height: '520px', background: C.soil }}>
+      <section className="relative w-full overflow-hidden h-[320px] md:h-[520px]" style={{ background: C.soil }}>
         {/* Background image */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
           <AnimatePresence initial={false} custom={direction}>
@@ -191,7 +191,7 @@ export default function Home() {
         </div>
 
         {/* Content */}
-        <div className="absolute inset-0 z-20 flex flex-col justify-center max-w-[90rem] mx-auto px-8 sm:px-14 lg:px-20">
+        <div className="absolute inset-0 z-20 flex flex-col justify-center max-w-[90rem] mx-auto px-12 sm:px-14 lg:px-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -200,33 +200,21 @@ export default function Home() {
               exit={{ opacity: 0, y: -18 }}
               transition={{ duration: 0.45 }}
             >
-              <span style={{
-                display: 'inline-block',
-                fontSize: 11, letterSpacing: '0.28em',
-                textTransform: 'uppercase',
-                color: C.primaryLight, fontWeight: 400,
-                marginBottom: 14,
-              }}>
+              <span className="inline-block text-[9px] md:text-[11px] tracking-[0.28em] uppercase font-normal mb-2 md:mb-3" style={{ color: C.primaryLight }}>
                 {sliderSlides[currentSlide].tag}
               </span>
 
-              <h1 style={{
+              <h1 className="font-semibold leading-tight text-white max-w-[560px] mb-2 md:mb-4" style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: 'clamp(34px, 5vw, 58px)',
-                fontWeight: 600, lineHeight: 1.12,
-                color: 'white', maxWidth: 560,
-                marginBottom: 16,
+                fontSize: 'clamp(24px, 5vw, 58px)',
               }}>
                 {sliderSlides[currentSlide].title}
               </h1>
 
-              <div style={{ width: 52, height: 2, background: C.primaryLight, borderRadius: 2, marginBottom: 18 }} />
+              <div className="w-[40px] md:w-[52px] h-[2px] rounded-sm mb-4 md:mb-5" style={{ background: C.primaryLight }} />
 
-              <p style={{
-                fontSize: 15, lineHeight: 1.7,
+              <p className="hidden sm:block text-[15px] leading-relaxed font-normal max-w-[440px] mb-6 md:mb-8" style={{
                 color: 'rgba(245,237,216,0.9)',
-                maxWidth: 440, marginBottom: 32,
-                fontWeight: 400,
               }}>
                 {sliderSlides[currentSlide].desc}
               </p>
@@ -234,28 +222,22 @@ export default function Home() {
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <Link
                   to="/products"
+                  className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-xl text-[11px] md:text-[13px] font-medium transition-all no-underline"
                   style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 8,
-                    padding: '13px 26px', borderRadius: 10,
                     background: C.primaryLight, color: C.soil,
-                    fontSize: 13, fontWeight: 500,
-                    textDecoration: 'none', transition: 'all 0.25s ease',
                   }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'white'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = C.primaryLight; }}
                 >
-                  Explore Collections <ArrowRight size={15} />
+                  Explore Collections <ArrowRight size={14} />
                 </Link>
                 <Link
                   to="/about"
+                  className="hidden sm:inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-xl text-[11px] md:text-[13px] font-normal transition-all no-underline"
                   style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 8,
-                    padding: '13px 26px', borderRadius: 10,
                     background: 'rgba(255,255,255,0.1)',
                     border: '1.5px solid rgba(255,255,255,0.3)',
-                    color: 'white', fontSize: 13, fontWeight: 400,
-                    textDecoration: 'none', transition: 'all 0.25s ease',
-                    backdropFilter: 'blur(6px)',
+                    color: 'white', backdropFilter: 'blur(6px)',
                   }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.2)'; }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; }}
@@ -286,11 +268,11 @@ export default function Home() {
         </div>
 
         {/* Arrows */}
-        {[{ dir: 'prev', icon: ChevronLeft, action: handlePrev, side: 'left-5' }, { dir: 'next', icon: ChevronRight, action: handleNext, side: 'right-5' }].map(({ dir, icon: Icon, action, side }) => (
+        {[{ dir: 'prev', icon: ChevronLeft, action: handlePrev, side: 'left-1 md:left-5' }, { dir: 'next', icon: ChevronRight, action: handleNext, side: 'right-1 md:right-5' }].map(({ dir, icon: Icon, action, side }) => (
           <button
             key={dir}
             onClick={action}
-            className={`absolute ${side} top-1/2 -translate-y-1/2 z-25 w-11 h-11 rounded-full flex items-center justify-center border transition-all cursor-pointer`}
+            className={`absolute ${side} top-1/2 -translate-y-1/2 z-25 w-8 h-8 md:w-11 md:h-11 rounded-full flex items-center justify-center border transition-all cursor-pointer`}
             style={{
               background: 'rgba(255,255,255,0.1)',
               border: '1.5px solid rgba(255,255,255,0.25)',
@@ -300,7 +282,7 @@ export default function Home() {
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.1)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; e.currentTarget.style.color = 'white'; }}
             aria-label={dir}
           >
-            <Icon size={20} />
+            <Icon className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         ))}
       </section>
@@ -309,10 +291,10 @@ export default function Home() {
       <section style={{ background: C.soil, padding: '0' }}>
         <div className="max-w-[90rem] mx-auto px-6 lg:px-14 py-0">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-x divide-y sm:divide-y-0" style={{ divideColor: 'rgba(255,255,255,0.1)' }}>
-            {stats.map(({ icon: Icon, value, label }) => (
+            {stats.map(({ icon: Icon, value, label }, index) => (
               <div
                 key={label}
-                className="flex items-center gap-4 px-6 py-5"
+                className={`flex items-center gap-4 px-6 py-5 ${index === stats.length - 1 ? 'col-span-2 sm:col-span-1 justify-center sm:justify-start' : ''}`}
                 style={{ borderColor: 'rgba(255,255,255,0.1)' }}
               >
                 <Icon size={22} color={C.primaryLight} />
@@ -390,7 +372,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {featuredCollections.map((col, i) => (
               <motion.div
                 key={col.label}
@@ -409,7 +391,7 @@ export default function Home() {
                     }}
                   >
                     {/* Image */}
-                    <div style={{ position: 'relative', height: 260, overflow: 'hidden' }}>
+                    <div className="relative h-[120px] sm:h-[260px] overflow-hidden">
                       <img
                         src={col.image}
                         alt={col.title}
@@ -422,7 +404,7 @@ export default function Home() {
                         background: `linear-gradient(to top, rgba(74,55,40,0.7) 0%, rgba(74,55,40,0.1) 50%, transparent 100%)`,
                       }} />
                       {/* Label badge */}
-                      <div style={{
+                      <div className="hidden sm:block" style={{
                         position: 'absolute', top: 14, left: 14,
                         background: 'rgba(253,249,242,0.92)',
                         backdropFilter: 'blur(6px)',
@@ -434,22 +416,22 @@ export default function Home() {
                         </span>
                       </div>
                       {/* Bottom text in image */}
-                      <div style={{ position: 'absolute', bottom: 14, left: 16, right: 16 }}>
-                        <p style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, color: 'white', fontWeight: 500, margin: 0 }}>
+                      <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4">
+                        <p className="text-white font-medium m-0 text-[13px] sm:text-[17px]" style={{ fontFamily: "'Playfair Display', serif" }}>
                           {col.title}
                         </p>
                       </div>
                     </div>
                     {/* Card body */}
-                    <div style={{ padding: '14px 16px 16px' }}>
-                      <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: '0 0 12px', fontWeight: 400 }}>
+                    <div className="p-3 sm:px-4 sm:py-4">
+                      <p className="text-[10px] sm:text-[13px] line-clamp-2 sm:line-clamp-none mb-2 sm:mb-3" style={{ color: C.stone, lineHeight: 1.4, fontWeight: 400 }}>
                         {col.desc}
                       </p>
-                      <span style={{
+                      <span className="text-[10px] sm:text-[12px]" style={{
                         display: 'inline-flex', alignItems: 'center', gap: 5,
-                        fontSize: 12, color: C.primary, fontWeight: 500,
+                        color: C.primary, fontWeight: 500,
                       }}>
-                        Explore <ArrowRight size={13} />
+                        Explore <ArrowRight size={12} />
                       </span>
                     </div>
                   </div>

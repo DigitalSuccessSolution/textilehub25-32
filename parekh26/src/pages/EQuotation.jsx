@@ -43,10 +43,10 @@ export default function EQuotation() {
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-24 lg:pt-32 pb-16 lg:pb-24">
 
         {/* Page Title Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 lg:mb-12">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 44px)', fontWeight: 500, color: C.soil, margin: '0 0 12px' }}>
             e-Quotation
           </h1>
@@ -101,33 +101,7 @@ export default function EQuotation() {
                   {item.specifications}
                 </p>
 
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '12px 14px', borderRadius: 10,
-                  background: C.sand, marginBottom: 14,
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Package size={14} color={C.primaryLight} />
-                    <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>Quantity Required</span>
-                  </div>
-                  <span style={{ fontSize: 14, color: C.soil, fontWeight: 500 }}>{item.quantity}</span>
-                </div>
 
-                <button
-                  onClick={() => document.getElementById('quote-form-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  style={{
-                    width: '100%', padding: '11px',
-                    background: C.primary, color: 'white',
-                    border: 'none', borderRadius: 10,
-                    fontSize: 13, fontWeight: 400,
-                    cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = C.accent}
-                  onMouseLeave={e => e.currentTarget.style.background = C.primary}
-                >
-                  Submit Bid
-                </button>
               </div>
             ))}
           </div>
@@ -147,8 +121,9 @@ export default function EQuotation() {
             boxShadow: '0 8px 40px rgba(74,55,40,0.08)',
           }}>
             {/* Form header */}
-            <div style={{
-              padding: '24px 32px',
+            <div 
+              className="p-6 md:p-8"
+              style={{
               borderBottom: `1px solid ${C.border}`,
               background: C.sand,
               display: 'flex', alignItems: 'center', gap: 14,
@@ -171,7 +146,7 @@ export default function EQuotation() {
               </div>
             </div>
 
-            <div style={{ padding: '32px' }}>
+            <div className="p-6 md:p-8">
               <form className="space-y-5" onSubmit={e => e.preventDefault()}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {[
@@ -229,12 +204,6 @@ export default function EQuotation() {
                   <Send size={15} /> Submit Quotation Request
                 </button>
 
-                <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                  <Mail size={13} color={C.primaryLight} />
-                  <a href="mailto:info@texmart.com" style={{ fontSize: 12, color: C.primary, fontWeight: 400, textDecoration: 'none' }}>
-                    info@texmart.com
-                  </a>
-                </div>
               </form>
             </div>
           </div>

@@ -13,10 +13,10 @@ const C = {
 };
 
 const jobs = [
-  { id: 1, title: 'Retail Operations Manager', location: 'Mumbai, India', type: 'Full-time', experience: '5-8 Years', description: 'Oversee store operations, manage staff, and ensure a premium customer experience across our flagship retail outlets.' },
-  { id: 2, title: 'Senior Fabric Technologist', location: 'Surat, India', type: 'Full-time', experience: '7+ Years', description: 'Lead quality control for incoming fabrics, develop new textile blends, and maintain material excellence.' },
-  { id: 3, title: 'B2B Sales Executive', location: 'Delhi, India', type: 'Full-time', experience: '2-4 Years', description: 'Expand our wholesale network, acquire new B2B accounts, and maintain strong relationships with key clients.' },
-  { id: 4, title: 'Digital Marketing Specialist', location: 'Remote', type: 'Full-time', experience: '3+ Years', description: 'Drive our online presence, manage social media campaigns, and optimize e-commerce conversion rates.' },
+  { id: 1, title: 'Retail Operations Manager', location: 'Mumbai, India', salary: '₹8.0L - ₹12.0L / year', description: 'Oversee store operations, manage staff, and ensure a premium customer experience across our flagship retail outlets.' },
+  { id: 2, title: 'Senior Fabric Technologist', location: 'Surat, India', salary: '₹10.0L - ₹15.0L / year', description: 'Lead quality control for incoming fabrics, develop new textile blends, and maintain material excellence.' },
+  { id: 3, title: 'B2B Sales Executive', location: 'Delhi, India', salary: '₹4.0L - ₹6.0L / year', description: 'Expand our wholesale network, acquire new B2B accounts, and maintain strong relationships with key clients.' },
+  { id: 4, title: 'Digital Marketing Specialist', location: 'Remote', salary: '₹6.0L - ₹9.0L / year', description: 'Drive our online presence, manage social media campaigns, and optimize e-commerce conversion rates.' },
 ];
 
 export default function Career() {
@@ -26,10 +26,10 @@ export default function Career() {
       
 
       {/* Main Content (4 Divs in 1 Row on desktop) */}
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 text-left pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 text-left pt-24 lg:pt-32 pb-16 lg:pb-24">
 
         {/* Page Title Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 lg:mb-12">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 40px)', fontWeight: 500, color: C.soil, margin: '0 0 12px' }}>
             Career Opportunities
           </h1>
@@ -55,12 +55,13 @@ export default function Career() {
                 <div className="flex flex-col gap-2.5 mb-5">
                   {[
                     { icon: MapPin, val: job.location },
-                    { icon: Briefcase, val: `${job.type} · ${job.experience}` },
+                    { icon: Briefcase, val: job.salary },
                     { icon: Clock, val: 'Apply by June 30, 2026' },
-                  ].map(({ icon: Icon, val }) => (
+                    { icon: Mail, val: 'careers@texmart.com', link: 'mailto:careers@texmart.com' },
+                  ].map(({ icon: Icon, val, link }) => (
                     <div key={val} style={{ color: C.stone }} className="flex items-center gap-2 text-xs font-semibold">
                       <Icon size={13} style={{ color: C.primaryLight }} className="shrink-0" />
-                      <span>{val}</span>
+                      {link ? <a href={link} style={{ color: C.stone, textDecoration: 'none' }} className="hover:opacity-85">{val}</a> : <span>{val}</span>}
                     </div>
                   ))}
                 </div>
@@ -80,13 +81,6 @@ export default function Career() {
                 >
                   Apply Now
                 </button>
-                <a
-                  href="mailto:careers@texmart.com"
-                  style={{ color: C.accent }}
-                  className="flex items-center justify-center gap-1.5 text-xs font-semibold hover:opacity-85"
-                >
-                  <Mail size={12} /> Email Us
-                </a>
               </div>
             </motion.div>
           ))}

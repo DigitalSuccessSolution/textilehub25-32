@@ -37,25 +37,7 @@ export default function Navbar() {
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Contact Us', path: '/contact' },
-    { 
-      name: 'Product', 
-      path: '/products',
-      dropdown: [
-        { name: 'All Products', path: '/products' },
-        { name: 'Sarees', path: '/products?category=Sarees' },
-        { name: 'Leggings', path: '/products?category=Leggings' },
-        { name: 'Kurtis', path: '/products?category=Kurtis' },
-        { name: 'Dress Suits', path: '/products?category=Dress Suits' },
-        { name: 'Bedsheets & Linen', path: '/products?category=Bedsheets & Linen' },
-        { name: 'Hosiery Items', path: '/products?category=Hosiery Items' },
-        { name: 'Suiting', path: '/products?category=Suiting' },
-        { name: 'Shirting', path: '/products?category=Shirting' },
-        { name: 'Formal & Ethnic Wear for Women', path: '/products?category=Formal & Ethnic Wear for Women' },
-        { name: 'Formal & Ethnic Wear for Men', path: '/products?category=Formal & Ethnic Wear for Men' },
-        { name: 'Formal & Ethnic Wear for Children', path: '/products?category=Formal & Ethnic Wear for Children' },
-        { name: 'Home Upholstery & Furnishing', path: '/products?category=Home Upholstery & Furnishing' }
-      ]
-    },
+    { name: 'Product', path: '/products' },
     { name: 'Our Retail Management', path: '/retail-management' },
     {
       name: 'Pages',
@@ -64,9 +46,9 @@ export default function Navbar() {
         { name: 'e-Quotation', path: '/e-quotation' },
         { name: 'e-Auction', path: '/e-auction' },
         { name: 'Trade Circular', path: '/trade-circular' },
-        { name: 'Blog Page', path: '/blog' },
+        { name: 'Blog', path: '/blog' },
         { name: 'Notice Board', path: '/notice-board' },
-        { name: 'Career Page', path: '/career' },
+        { name: 'Career', path: '/career' },
         { name: 'Customer Review', path: '/reviews' },
         { name: 'Business Media Gallery', path: '/gallery' },
         { name: 'FAQ', path: '/faq' }
@@ -104,7 +86,7 @@ export default function Navbar() {
           fontSize: '11px',
           color: '#556652' 
         }} 
-        className="py-2.5 px-6 sm:px-8 lg:px-14 flex flex-row justify-between items-center gap-2"
+        className="relative z-50 py-2.5 px-6 sm:px-8 lg:px-14 flex flex-row justify-between items-center gap-2"
       >
         <div className="flex items-center gap-1.5 font-medium">
           <Leaf size={12} style={{ color: C.primary }} />
@@ -131,7 +113,7 @@ export default function Navbar() {
 
       {/* ── Main Navbar ── */}
       <div
-        className={`w-full transition-all duration-300 ${scrolled ? 'shadow-md py-2' : 'py-3.5'}`}
+        className={`relative z-50 w-full transition-all duration-300 ${scrolled ? 'shadow-md py-2' : 'py-3.5'}`}
         style={{
           background: scrolled ? 'rgba(250, 248, 245, 0.98)' : '#faf8f5',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
@@ -309,21 +291,12 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 top-[95px] z-40 flex flex-col"
+          className="lg:hidden fixed inset-0 z-40 flex flex-col pt-[110px]"
           style={{ background: '#faf8f5', fontFamily: "'DM Sans', sans-serif" }}
         >
-          <div className="h-[2px] w-full" style={{ background: `linear-gradient(90deg, ${C.primary}, ${C.accent}, ${C.primary})` }} />
+          <div className="h-[2px] w-full relative z-50" style={{ background: `linear-gradient(90deg, ${C.primary}, ${C.accent}, ${C.primary})` }} />
 
-          <div className="flex-1 overflow-y-auto px-5 py-6 pb-24 space-y-2">
-            <div className="px-3 mb-4 pb-4" style={{ borderBottom: `1px solid ${C.border}` }}>
-              <p className="font-bold text-lg" style={{ color: C.soil, fontFamily: "'Playfair Display', serif" }}>
-                TEXMART
-              </p>
-              <p className="text-[9px] tracking-wider uppercase mt-1 font-semibold text-accent">
-                TEXTILE RETAIL MALL
-              </p>
-            </div>
-
+          <div className="flex-1 overflow-y-auto px-5 py-4 pb-24 space-y-2">
             {navItems.map((item) => {
               const active = isItemActive(item);
               return (

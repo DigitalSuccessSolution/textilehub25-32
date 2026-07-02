@@ -37,7 +37,7 @@ export default function Navbar() {
     { name: 'About Us', path: '/about' },
     { name: 'Contact Us', path: '/contact' },
     { name: 'Products', path: '/products' },
-    { name: 'Retail Management', path: '/retail-management' },
+    { name: 'Our Retail Management', path: '/retail-management' },
   ];
 
   const moreLinks = [
@@ -48,7 +48,7 @@ export default function Navbar() {
     { name: 'Notice Board', path: '/notice-board' },
     { name: 'Career', path: '/career' },
     { name: 'Customer Reviews', path: '/reviews' },
-    { name: 'Media Gallery', path: '/gallery' },
+    { name: 'Business Media Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' },
   ];
 
@@ -56,7 +56,7 @@ export default function Navbar() {
 
   return (
     <header
-      className="w-full fixed top-0 left-0 z-50 transition-all duration-300"
+      className="w-full fixed top-0 left-0 z-[100] transition-all duration-300"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
 
@@ -255,23 +255,13 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {isOpen && (
         <div
-          className="lg:hidden fixed inset-0 top-[59px] z-40 flex flex-col"
+          className="lg:hidden fixed inset-0 top-[59px] z-[99] flex flex-col"
           style={{ background: '#FDF9F2', fontFamily: "'DM Sans', sans-serif" }}
         >
           {/* Decorative strip at top of drawer */}
           <div className="h-[2px] w-full" style={{ background: 'linear-gradient(90deg, #C4A35A, #8B6914, #7A8C6E)' }} />
 
           <div className="flex-1 overflow-y-auto px-5 py-7 pb-24 space-y-1.5">
-            {/* Brand Title in drawer */}
-            <div className="px-3 mb-6 pb-6" style={{ borderBottom: `1px solid ${C.border}` }}>
-              <p className="display-title text-lg" style={{ color: C.soil }}>
-                Textile <span style={{ color: C.primary, fontStyle: 'italic' }}>Paradise</span>
-              </p>
-              <p className="text-[10px] tracking-widest uppercase mt-1" style={{ color: C.stone }}>
-                India's Finest Textile Destination
-              </p>
-            </div>
-
             <p className="px-3 text-[10px] font-medium tracking-[0.2em] uppercase mb-2" style={{ color: C.stone }}>
               Navigation
             </p>
@@ -300,7 +290,7 @@ export default function Navbar() {
               More Pages
             </p>
 
-            <div className="space-y-1">
+            <div className="grid grid-cols-2 gap-2">
               {moreLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
@@ -308,9 +298,10 @@ export default function Navbar() {
                     key={link.name}
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-[13px] font-medium transition-all duration-200"
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-[11px] font-medium transition-all duration-200 border"
                     style={{
-                      background: isActive ? 'rgba(139,105,20,0.08)' : 'transparent',
+                      background: isActive ? 'rgba(139,105,20,0.08)' : '#FFFFFF',
+                      borderColor: isActive ? 'rgba(139,105,20,0.25)' : C.border,
                       color: isActive ? C.primary : C.stone,
                     }}
                   >

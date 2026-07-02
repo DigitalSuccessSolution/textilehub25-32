@@ -128,17 +128,6 @@ export default function Footer() {
             © 2026 Texmart Textile Retail Mall · All Rights Reserved
           </p>
           <div style={{ display: 'flex', gap: 16 }}>
-            {['Privacy Policy', 'Terms of Service', 'Sitemap'].map(txt => (
-              <a
-                key={txt}
-                href="#"
-                style={{ fontSize: 11, color: C.textFaint, textDecoration: 'none', fontWeight: 400, letterSpacing: '0.05em' }}
-                onMouseEnter={e => e.currentTarget.style.color = C.accent}
-                onMouseLeave={e => e.currentTarget.style.color = C.textFaint}
-              >
-                {txt}
-              </a>
-            ))}
           </div>
         </div>
       </div>

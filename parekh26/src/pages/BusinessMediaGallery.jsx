@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 const C = {
   primary: '#7c8e76',
@@ -11,32 +12,48 @@ const C = {
 };
 
 const galleryItems = [
-  { title: "Global Textile Summit 2026", desc: "Our leadership team presenting the future of sustainable fabrics to international delegates and industry leaders.", category: "Event", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60" },
-  { title: "New Manufacturing Unit Inauguration", desc: "Expanding our footprint with a state-of-the-art facility in Gujarat, boosting our production capacity by 40%.", category: "Infrastructure", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=60" },
-  { title: "Award for Excellence in Exports", desc: "Receiving the national award for outstanding contribution to textile exports from the Ministry of Commerce.", category: "Achievement", image: "https://images.unsplash.com/photo-1561489422-45de3d015e3e?w=800&auto=format&fit=crop&q=60" },
-  { title: "Annual Retailers Meet", desc: "Celebrating success and building stronger bonds with our 50,000+ retail partners across India.", category: "Community", image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800&auto=format&fit=crop&q=60" },
-  { title: "Launch of Eco-Weave Collection", desc: "A milestone event marking our commitment to 100% organic materials and environmentally friendly dyes.", category: "Product Launch", image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=60" },
-  { title: "Skill Development Workshop", desc: "Empowering local artisans and weavers with modern textile technologies to preserve heritage crafts.", category: "CSR Initiative", image: "https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?w=800&auto=format&fit=crop&q=60" },
+  { title: "Advanced Weaving Machinery", date: "June 25, 2026", category: "Infrastructure", image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop&q=60" },
+  { title: "Cotton Spinning Process", date: "June 12, 2026", category: "Production", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=60" },
+  { title: "Quality Inspection", date: "May 30, 2026", category: "Quality Assurance", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=60" },
+  { title: "Textile Storage Warehouse", date: "May 15, 2026", category: "Logistics", image: "https://images.pexels.com/photos/7005687/pexels-photo-7005687.jpeg" },
+  { title: "Dyeing Plant Operations", date: "April 28, 2026", category: "Production", image: "https://images.pexels.com/photos/7679877/pexels-photo-7679877.jpeg" },
 ];
 
 export default function BusinessMediaGallery() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const filteredItems = activeCategory === "All" ? galleryItems : galleryItems.filter(item => item.category === activeCategory);
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.cream }}>
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 pt-24 lg:pt-32 pb-16 lg:pb-24">
 
         {/* Page Title Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10 lg:mb-12">
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 44px)', fontWeight: 500, color: C.soil, margin: '0 0 12px' }}>
-            Media Gallery
+           Business Media Gallery
           </h1>
           <div style={{ width: 44, height: 2, background: 'linear-gradient(90deg, #a3b89d, #7c8e76)', borderRadius: 2, margin: '0 auto' }} />
         </div>
   
+        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <p style={{ fontSize: 13, color: C.stone, marginBottom: 16 }}>Explore our diverse range of operations and initiatives.</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
+            {['All', 'Infrastructure', 'Production', 'Quality Assurance', 'Logistics'].map(cat => (
+              <button 
+                key={cat} 
+                onClick={() => setActiveCategory(cat)}
+                style={{ padding: '6px 16px', borderRadius: 20, background: cat === activeCategory ? C.primary : 'transparent', color: cat === activeCategory ? 'white' : C.primary, border: `1px solid ${C.primary}`, fontSize: 12, cursor: 'pointer', transition: 'all 0.2s ease' }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryItems.map((item, idx) => (
+          {filteredItems.map((item, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
@@ -70,13 +87,11 @@ export default function BusinessMediaGallery() {
                 </div>
               </div>
 
-              <div style={{ padding: '20px', flex: 1 }}>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 500, color: C.soil, margin: '0 0 8px', lineHeight: 1.4 }}>
+              <div style={{ padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontSize: 12, color: C.stone, marginBottom: 8, fontWeight: 400 }}>{item.date}</span>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 500, color: C.soil, margin: '0', lineHeight: 1.4 }}>
                   {item.title}
                 </h3>
-                <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
-                  {item.desc}
-                </p>
               </div>
             </motion.div>
           ))}

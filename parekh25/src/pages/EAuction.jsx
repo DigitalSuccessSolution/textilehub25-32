@@ -15,39 +15,27 @@ const C = {
 const auctions = [
   {
     id: "AUC-2026-009",
-    title: "Surplus Organic Linen Stock",
-    description: "Lot of premium surplus dyed and organic linen fabrics. Total quantity of approx. 4,500 meters of various color rolls in pristine condition.",
-    quantity: "4,500 Meters",
-    reservePrice: "₹2,50,000",
-    currentBid: "₹2,80,000",
-    bidsCount: 8,
-    closingTime: "June 20, 2026 · 17:00 IST",
-    image: "https://images.unsplash.com/photo-1576016770956-debb63d90029?w=600&auto=format&fit=crop&q=60",
+    title: "Surplus Cotton Yarn Liquidation",
+    description: "Online bidding for 2,500 kg of premium grade carded cotton yarn. Starting bid ₹180/kg.",
+    quantity: "2,500 Kilograms",
+    reservePrice: "₹4,50,000",
+    currentBid: "₹4,65,000",
+    bidsCount: 12,
+    closingTime: "July 05, 2026 · 17:00 IST",
+    image: "https://images.unsplash.com/photo-1606744824163-985d376605aa?w=600&auto=format&fit=crop&q=60",
     status: 'active',
   },
   {
     id: "AUC-2026-010",
-    title: "Premium Jacquard Weaving Warp Yarns",
-    description: "High-grade industrial warp & weft jacquard yarns. 100% natural wool-cotton textures, surplus stock from our high-end winter line.",
-    quantity: "1,200 Kilograms",
-    reservePrice: "₹1,80,000",
-    currentBid: "₹1,95,000",
-    bidsCount: 4,
-    closingTime: "June 24, 2026 · 14:00 IST",
-    image: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=600&auto=format&fit=crop&q=60",
+    title: "Unused Jacquard Fabric Rolls",
+    description: "Liquidation of 450 meters of high-end jacquard brocade fabrics. Starting bid ₹320/meter.",
+    quantity: "450 Meters",
+    reservePrice: "₹1,44,000",
+    currentBid: "₹1,50,000",
+    bidsCount: 5,
+    closingTime: "July 08, 2026 · 14:00 IST",
+    image: "https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&auto=format&fit=crop&q=60",
     status: 'active',
-  },
-  {
-    id: "AUC-2026-011",
-    title: "Eco-Luxe Mercerized Cotton Cones",
-    description: "Mercerized carded cotton warp cones, assorted colors, high tensile strength, perfect for weaving machinery warp setup.",
-    quantity: "3,000 Kilograms",
-    reservePrice: "₹3,20,000",
-    currentBid: "₹3,20,000",
-    bidsCount: 0,
-    closingTime: "June 28, 2026 · 11:00 IST",
-    image: "https://images.unsplash.com/photo-1605697040924-852290f6768a?w=600&auto=format&fit=crop&q=60",
-    status: 'new',
   }
 ];
 
@@ -79,7 +67,7 @@ export default function EAuction() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 mb-14">
             {auctions.map((auction) => (
               <div
                 key={auction.id}
@@ -91,7 +79,7 @@ export default function EAuction() {
                 }}
               >
                 {/* Image */}
-                <div style={{ height: 150, overflow: 'hidden', position: 'relative' }}>
+                <div className="relative h-[110px] sm:h-[150px] overflow-hidden">
                   <img
                     src={auction.image}
                     alt={auction.title}
@@ -100,70 +88,21 @@ export default function EAuction() {
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                     loading="lazy"
                   />
-                  <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', gap: 6 }}>
-                    <span style={{
-                      fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em',
-                      padding: '3px 10px', borderRadius: 20,
-                      background: C.soil, color: 'white', fontWeight: 400,
-                    }}>{auction.id}</span>
-                    {auction.status === 'new' && (
-                      <span style={{
-                        fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em',
-                        padding: '3px 10px', borderRadius: 20,
-                        background: '#7A8C6E', color: 'white', fontWeight: 400,
-                      }}>New</span>
-                    )}
-                  </div>
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                  <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 500, color: C.soil, margin: '0 0 8px' }}>
+                <div className="p-3 sm:p-4 flex flex-col flex-1">
+                  <div className="flex items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
+                    <Clock size={12} color={C.primaryLight} />
+                    <span className="text-[9px] sm:text-[11px]" style={{ color: C.stone, fontWeight: 400 }}>{auction.closingTime}</span>
+                  </div>
+
+                  <h3 className="text-[13px] sm:text-[17px]" style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500, color: C.soil, margin: '0 0 6px sm:0 0 8px' }}>
                     {auction.title}
                   </h3>
-                  <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: '0 0 16px', fontWeight: 400 }}>
+                  <p className="text-[11px] sm:text-[13px] line-clamp-2 sm:line-clamp-none flex-1" style={{ color: C.stone, lineHeight: 1.4, margin: 0, fontWeight: 400 }}>
                     {auction.description}
                   </p>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 14, padding: '10px 0', borderTop: `1px dashed ${C.border}` }}>
-                    <Clock size={13} color={C.primaryLight} />
-                    <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>Closes: {auction.closingTime}</span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3 mb-4 p-3 rounded-xl" style={{ background: C.sand }}>
-                    {[
-                      { label: 'Quantity', val: auction.quantity },
-                      { label: 'Reserve Price', val: auction.reservePrice },
-                      { label: 'Current Bid', val: auction.currentBid, highlight: true },
-                      { label: 'Bids Placed', val: `${auction.bidsCount} bids` },
-                    ].map(({ label, val, highlight }) => (
-                      <div key={label}>
-                        <span style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em', color: C.stone, display: 'block', marginBottom: 2, fontWeight: 400 }}>
-                          {label}
-                        </span>
-                        <span style={{ fontSize: 13, color: highlight ? C.primary : C.soil, fontWeight: highlight ? 500 : 400 }}>
-                          {val}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => document.getElementById('auction-reg-form')?.scrollIntoView({ behavior: 'smooth' })}
-                    style={{
-                      width: '100%', padding: '11px',
-                      background: C.soil, color: 'white',
-                      border: 'none', borderRadius: 10,
-                      fontSize: 13, fontWeight: 400,
-                      cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                      transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.background = C.primary}
-                    onMouseLeave={e => e.currentTarget.style.background = C.soil}
-                  >
-                    <TrendingUp size={14} /> Register to Bid
-                  </button>
                 </div>
               </div>
             ))}
@@ -214,7 +153,7 @@ export default function EAuction() {
                   {[
                     { label: 'Name of the Participant *', type: 'text' },
                     { label: 'Legal Name of Business *', type: 'text' },
-                    { label: 'Business Address with PIN Code *', type: 'text' },
+                    { label: 'Business Address with Pin Code *', type: 'text' },
                     { label: 'GST No.', type: 'text' },
                     { label: 'Mobile No. *', type: 'tel' },
                     { label: 'Email ID *', type: 'email' },
@@ -231,7 +170,7 @@ export default function EAuction() {
                 {/* Upload */}
                 <div>
                   <label style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.15em', color: C.stone, display: 'block', marginBottom: 8, fontWeight: 400 }}>
-                    Upload GST Certificate
+                    Upload GST Certificate *
                   </label>
                   <label style={{
                     width: '100%', border: `2px dashed ${C.border}`,
@@ -265,12 +204,6 @@ export default function EAuction() {
                   <Send size={15} /> Submit Registration
                 </button>
 
-                <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                  <Mail size={13} color={C.primaryLight} />
-                  <a href="mailto:info@textileparadise.com" style={{ fontSize: 12, color: C.primary, fontWeight: 400, textDecoration: 'none' }}>
-                    info@textileparadise.com
-                  </a>
-                </div>
               </form>
             </div>
           </div>
