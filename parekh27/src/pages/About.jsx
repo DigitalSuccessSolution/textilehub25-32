@@ -46,7 +46,7 @@ export default function About() {
             </h2>
             
             <p style={{ color: C.stone }} className="text-sm sm:text-base leading-relaxed mb-6 font-medium">
-              Established with a commitment to excellence, <strong>Fashion Heritage</strong> has grown to become India's premier fabric and apparel destination. We curate a vast collection of high-quality fabrics, heritage sarees, fine dress materials, and luxury home linen, catering to both retail shoppers and commercial B2B clients nationwide.
+              Established with a commitment to excellence, <strong>Fashion Heritage</strong> has grown to become India's premier fabrics and apparel destination. We curate a vast collection of high-quality fabrics, heritage sarees, fine dress materials, and luxury home linen, catering to both retail shoppers and commercial B2B clients nationwide.
             </p>
             
             <p style={{ color: C.stone }} className="text-sm sm:text-base leading-relaxed mb-8">
