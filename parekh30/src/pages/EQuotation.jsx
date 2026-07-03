@@ -108,34 +108,6 @@ export default function EQuotation() {
                 <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: '0 0 16px', fontWeight: 400, flex: 1 }}>
                   {item.specifications}
                 </p>
-
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '12px 14px', borderRadius: 10,
-                  background: C.sand, marginBottom: 14,
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Package size={14} color={C.primaryLight} />
-                    <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>Quantity Required</span>
-                  </div>
-                  <span style={{ fontSize: 14, color: C.soil, fontWeight: 500 }}>{item.quantity}</span>
-                </div>
-
-                <button
-                  onClick={() => document.getElementById('quote-form-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  style={{
-                    width: '100%', padding: '11px',
-                    background: C.primary, color: 'white',
-                    border: 'none', borderRadius: 10,
-                    fontSize: 13, fontWeight: 500,
-                    cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = C.accent}
-                  onMouseLeave={e => e.currentTarget.style.background = C.primary}
-                >
-                  Submit Bid
-                </button>
               </div>
             ))}
           </div>
@@ -185,7 +157,7 @@ export default function EQuotation() {
                   {[
                     { label: 'Name of the Trader *', type: 'text' },
                     { label: 'Business Name *', type: 'text' },
-                    { label: 'Business Address with PIN Code *', type: 'text' },
+                    { label: 'Business Address with Pin Code *', type: 'text' },
                     { label: 'GST No.', type: 'text' },
                     { label: 'Mobile No. *', type: 'tel' },
                     { label: 'Email ID *', type: 'email' },
@@ -236,13 +208,6 @@ export default function EQuotation() {
                 >
                   <Send size={15} /> Submit Quotation Request
                 </button>
-
-                <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                  <Mail size={13} color={C.primaryLight} />
-                  <a href="mailto:info@indianfabrichouse.com" style={{ fontSize: 12, color: C.primary, fontWeight: 400, textDecoration: 'none' }}>
-                    info@indianfabrichouse.com
-                  </a>
-                </div>
               </form>
             </div>
           </div>

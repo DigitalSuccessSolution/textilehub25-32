@@ -13,10 +13,30 @@ const C = {
 };
 
 const notices = [
-  { id: 1, title: 'Annual General Meeting 2026', date: 'Nov 01, 2026', isNew: true },
-  { id: 2, title: 'Warehouse Closure Notice for Maintenance (Ahmedabad Depot)', date: 'Oct 20, 2026', isNew: true },
-  { id: 3, title: 'Introduction of e-Way Bill Integration in Partner Portal', date: 'Sep 15, 2026', isNew: true },
-  { id: 4, title: 'Recruitment Drive for Zonal Sales Managers', date: 'Aug 22, 2026', isNew: false },
+  { 
+    id: 1, 
+    title: 'Annual General Meeting 2026', 
+    date: 'Nov 01, 2026',
+    description: "All members and stakeholders are cordially invited to attend the Annual General Meeting to discuss the company's annual financial performance and future expansion strategies." 
+  },
+  { 
+    id: 2, 
+    title: 'Warehouse Closure Notice for Maintenance (Ahmedabad Depot)', 
+    date: 'Oct 20, 2026',
+    description: "The Ahmedabad depot will remain closed for bi-annual maintenance and technical upgrades from October 22nd to October 24th, 2026. Normal operations will resume on October 25th." 
+  },
+  { 
+    id: 3, 
+    title: 'Introduction of e-Way Bill Integration in Partner Portal', 
+    date: 'Sep 15, 2026',
+    description: "Logistics partners can now directly generate and sync e-way bills within the partner portal, improving dispatch speed, accuracy, and regulatory compliance." 
+  },
+  { 
+    id: 4, 
+    title: 'Recruitment Drive for Zonal Sales Managers', 
+    date: 'Aug 22, 2026',
+    description: "We are hiring experienced Zonal Sales Managers to direct our sales force, establish new distributor channels, and expand market share in Northern and Western regions." 
+  },
 ];
 
 export default function NoticeBoard() {
@@ -44,22 +64,21 @@ export default function NoticeBoard() {
               className="card-hover text-left"
               style={{
                 borderRadius: 16, padding: '24px 22px',
-                background: notice.isNew ? 'rgba(71, 86, 67, 0.02)' : 'white',
-                cursor: 'pointer',
+                background: 'white',
                 display: 'flex', flexDirection: 'column',
-                borderLeft: notice.isNew ? `4px solid ${C.primaryLight}` : '4px solid transparent',
                 border: `1px solid ${C.border}`,
+                borderTop: `4px solid ${C.primaryLight}`,
                 transition: 'all 0.3s ease',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(71, 86, 67, 0.05)';
-                e.currentTarget.style.borderLeftColor = C.primaryLight;
-                e.currentTarget.style.transform = 'translateX(4px)';
+                e.currentTarget.style.background = 'rgba(71, 86, 67, 0.03)';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.boxShadow = '0 12px 30px rgba(14,107,107,0.08)';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.background = notice.isNew ? 'rgba(71, 86, 67, 0.02)' : 'white';
-                e.currentTarget.style.borderLeftColor = notice.isNew ? C.primaryLight : 'transparent';
-                e.currentTarget.style.transform = 'translateX(0)';
+                e.currentTarget.style.background = 'white';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <div>
@@ -67,23 +86,17 @@ export default function NoticeBoard() {
                   <div style={{ width: 40, height: 40, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(71, 86, 67, 0.08)', border: `1px solid rgba(71, 86, 67, 0.2)` }}>
                     <Bell size={18} color={C.primary} />
                   </div>
-                  {notice.isNew && (
-                    <span style={{ fontSize: 9, padding: '3px 10px', borderRadius: 20, color: C.accent, background: C.sand, letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600, border: `1px solid rgba(176, 87, 66, 0.2)` }}>
-                      New
-                    </span>
-                  )}
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12 }}>
                   <Calendar size={12} color={C.stone} />
                   <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>{notice.date}</span>
                 </div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 600, color: C.soil, lineHeight: 1.45, margin: '0 0 16px' }}>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 600, color: C.soil, lineHeight: 1.45, margin: '0 0 10px' }}>
                   {notice.title}
                 </h3>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: 14, marginTop: 'auto', borderTop: `1px solid ${C.border}` }}>
-                <span style={{ fontSize: 12, color: C.primary, fontWeight: 500 }}>Read More</span>
-                <ChevronRight size={15} color={C.primary} />
+                <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: 0, fontWeight: 400 }}>
+                  {notice.description}
+                </p>
               </div>
             </div>
           ))}

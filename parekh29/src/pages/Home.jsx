@@ -22,29 +22,29 @@ const C = {
 // 5 Popular Collections matching mockup
 const popularCollections = [
   { 
-    name: 'PRINTED FABRICS', 
-    image: '/images/printed_fabrics.png',
-    path: '/products?category=Printed Fabrics'
+    name: 'BANARASI SILK SAREES', 
+    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&auto=format&fit=crop&q=60',
+    path: '/products?category=Sarees'
   },
   { 
-    name: 'PLAIN FABRICS', 
-    image: '/images/plain_fabrics.png',
-    path: '/products?category=Plain Fabrics'
+    name: 'HANDCRAFTED KURTIS', 
+    image: 'https://images.unsplash.com/photo-1741847639057-b51a25d42892?w=600&auto=format&fit=crop&q=60',
+    path: '/products?category=Kurtis'
   },
   { 
-    name: 'ETHNIC WEAR', 
-    image: '/images/ethnic_wear.png',
-    path: '/products?category=Ethnic Wear'
+    name: 'DESIGNER LEHENGAS', 
+    image: 'https://images.pexels.com/photos/16803130/pexels-photo-16803130.jpeg',
+    path: '/products?category=Formal & Ethnic Wear for Women'
   },
   { 
-    name: 'HOME TEXTILES', 
-    image: '/images/home_textiles.png',
+    name: 'EGYPTIAN COTTON BEDSHEETS', 
+    image: 'https://images.pexels.com/photos/7746574/pexels-photo-7746574.jpeg',
     path: '/products?category=Bedsheets & Linen'
   },
   { 
-    name: 'KIDS WEAR', 
-    image: '/images/kids_wear.png',
-    path: '/products?category=Hosiery Items' // mapping kids wear to hosiery/cotton items
+    name: 'KIDS FESTIVE WEAR', 
+    image: 'https://images.unsplash.com/photo-1741992556912-3b2d62461e75?w=600&auto=format&fit=crop&q=60',
+    path: '/products?category=Formal & Ethnic Wear for Children'
   }
 ];
 
@@ -72,7 +72,7 @@ const heroSlides = [
     subtitle: "Soft, safe & colorful fabrics for children's clothing — comfort that parents trust.",
     image: "https://images.pexels.com/photos/5864245/pexels-photo-5864245.jpeg",
     cta: "View Kids Collection",
-    path: "/products?category=Hosiery Items"
+    path: "/products?category=Formal & Ethnic Wear for Children"
   }
 ];
 

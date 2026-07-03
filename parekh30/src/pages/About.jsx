@@ -48,7 +48,7 @@ export default function About() {
               }}
             >
               <img
-                src="/images/about_hero.png"
+                src="https://images.pexels.com/photos/8886947/pexels-photo-8886947.jpeg"
                 alt="Premium Textile Assortment"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
               />

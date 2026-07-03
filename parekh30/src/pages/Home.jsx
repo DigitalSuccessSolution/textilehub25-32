@@ -62,12 +62,12 @@ const heroCategories = [
   {
     name: 'Sarees',
     image: '/images/ethnic_wear.png',
-    path: '/products?category=Ethnic Wear',
+    path: '/products?category=Sarees',
   },
   {
     name: 'Fabrics',
     image: '/images/printed_fabrics.png',
-    path: '/products?category=Printed Fabrics',
+    path: '/products?category=Suiting',
   },
   {
     name: 'Kids Wear',
@@ -179,13 +179,24 @@ export default function Home() {
   const [direction, setDirection] = useState(1);
   const picksRef = useRef(null);
 
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768;
+  const isTablet = windowWidth >= 768 && windowWidth < 1024;
+
   const nextSlide = () => {
     setDirection(1);
-    setSlideIndex((prev) => (prev + 1) % heroSlides.length);
+    setSlideIndex((prev) => (prev + 1) % heroCategories.length);
   };
   const prevSlide = () => {
     setDirection(-1);
-    setSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setSlideIndex((prev) => (prev - 1 + heroCategories.length) % heroCategories.length);
   };
 
   useEffect(() => {
@@ -219,10 +230,17 @@ export default function Home() {
         <div style={{ position: 'absolute', top: 0, left: 0, width: 300, height: 400, background: 'rgba(14,107,107,0.05)', borderRadius: '0 0 100% 0', filter: 'blur(40px)' }} />
         <div style={{ position: 'absolute', bottom: 0, right: 0, width: 400, height: 300, background: 'rgba(200,146,42,0.05)', borderRadius: '100% 0 0 0', filter: 'blur(40px)' }} />
         
-        <div className="w-full max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-10 xl:px-14 flex flex-col lg:flex-row items-center relative z-10">
+        <div className="w-full max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-10 xl:px-14 flex flex-col-reverse lg:flex-row items-center relative z-10">
           
           {/* Left: Text Content */}
-          <div className="w-full lg:w-[40%] flex flex-col items-start pr-8 mb-12 lg:mb-0 text-left">
+          <div
+            className="w-full lg:w-[40%] flex flex-col pr-8 mt-10 lg:mt-0"
+            style={{
+              alignItems: isMobile || isTablet ? 'center' : 'flex-start',
+              textAlign: isMobile || isTablet ? 'center' : 'left',
+              paddingRight: isMobile || isTablet ? 0 : 32
+            }}
+          >
             <span style={{ color: '#7a9e9e', fontSize: 13, fontWeight: 600, letterSpacing: '0.05em', marginBottom: 16 }}>
               Timeless Weaves, Modern You
             </span>
@@ -262,15 +280,21 @@ export default function Home() {
           </div>
 
           {/* Right: The Specific Slider */}
-          <div className="w-full lg:w-[60%] relative flex items-center justify-center mt-10 lg:mt-0">
+          <div className="w-full lg:w-[60%] relative flex flex-col items-center justify-center mb-6 lg:mb-0">
             {/* Left/Right Arrows Removed */}
 
 
-            <div className="flex items-center justify-center gap-3 md:gap-4 w-full h-[500px]">
+            <div
+              className="flex items-center justify-center gap-3 md:gap-4 w-full"
+              style={{ height: isMobile ? 400 : (isTablet ? 440 : 500) }}
+            >
               {heroCategories.map((cat, idx) => {
                 const isActive = idx === slideIndex;
                 
-                // Staggered default heights to keep the visual design when not active
+                // On mobile and tablet, only render the single active card
+                if ((isMobile || isTablet) && !isActive) return null;
+
+                // Staggered default heights to keep the visual design when not active (on desktop)
                 const defaultStyles = [
                   { w: '24%', h: 360, y: 15 },
                   { w: '26%', h: 380, y: 5 },
@@ -278,9 +302,9 @@ export default function Home() {
                   { w: '22%', h: 300, y: 10 }
                 ];
                 
-                const slotWidth = isActive ? '32%' : defaultStyles[idx].w;
-                const slotHeight = isActive ? 460 : defaultStyles[idx].h;
-                const translateY = isActive ? -15 : defaultStyles[idx].y;
+                const slotWidth = isMobile ? '95%' : (isTablet ? '80%' : (isActive ? '32%' : defaultStyles[idx].w));
+                const slotHeight = isMobile ? 360 : (isTablet ? 400 : (isActive ? 460 : defaultStyles[idx].h));
+                const translateY = isMobile || isTablet ? 0 : (isActive ? -15 : defaultStyles[idx].y);
                 const zIndex = isActive ? 10 : 1;
                 const shadow = isActive ? '0 20px 40px rgba(14,107,107,0.15)' : '0 10px 30px rgba(0,0,0,0.04)';
 
@@ -298,8 +322,9 @@ export default function Home() {
                     style={{
                       background: '#ffffff', borderRadius: 24, overflow: 'hidden',
                       display: 'flex', flexDirection: 'column', position: 'relative',
-                      flexShrink: 0
+                      flexShrink: 0, cursor: 'pointer'
                     }}
+                    onClick={() => navigate(cat.path)}
                   >
                     {isActive && (
                       <div style={{ position: 'absolute', top: 16, right: 16, zIndex: 10 }}>
@@ -317,23 +342,70 @@ export default function Home() {
                 );
               })}
             </div>
-          </div>
-        </div>
 
-        {/* Dots */}
-        <div style={{ display: 'flex', gap: 10, marginTop: 40, zIndex: 10 }}>
-          {heroCategories.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setSlideIndex(idx)}
-              style={{
-                width: 10, height: 10, borderRadius: '50%',
-                background: idx === slideIndex ? C.primary : 'transparent',
-                border: idx === slideIndex ? 'none' : `2px solid #c8e0e0`,
-                padding: 0, cursor: 'pointer', transition: 'all 0.3s'
-              }}
-            />
-          ))}
+            {/* Chevron buttons */}
+            <div style={{ display: 'flex', gap: 10, marginTop: 15, zIndex: 10 }}>
+              <button
+                onClick={prevSlide}
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  background: '#ffffff',
+                  border: `1px solid ${C.border}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  color: C.primary,
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = C.primary; e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = C.primary; }}
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={nextSlide}
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  background: '#ffffff',
+                  border: `1px solid ${C.border}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  color: C.primary,
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = C.primary; e.currentTarget.style.color = '#fff'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = C.primary; }}
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+
+            {/* Dots */}
+            <div style={{ display: 'flex', gap: 10, marginTop: 15, zIndex: 10 }}>
+              {heroCategories.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSlideIndex(idx)}
+                  style={{
+                    width: 10, height: 10, borderRadius: '50%',
+                    background: idx === slideIndex ? C.primary : 'transparent',
+                    border: idx === slideIndex ? 'none' : `2px solid #c8e0e0`,
+                    padding: 0, cursor: 'pointer', transition: 'all 0.3s'
+                  }}
+                />
+              ))}
+            </div>
+
+          </div>
         </div>
       </section>
 

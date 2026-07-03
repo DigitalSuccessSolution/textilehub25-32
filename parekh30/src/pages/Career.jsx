@@ -13,10 +13,10 @@ const C = {
 };
 
 const jobs = [
-  { id: 1, title: 'Retail Operations Manager', location: 'Mumbai, India', type: 'Full-time', experience: '5-8 Years', description: 'Oversee store operations, manage staff, and ensure a premium customer experience across our flagship retail outlets.' },
-  { id: 2, title: 'Senior Fabric Technologist', location: 'Surat, India', type: 'Full-time', experience: '7+ Years', description: 'Lead quality control for incoming fabrics, develop new textile blends, and maintain material excellence.' },
-  { id: 3, title: 'B2B Sales Executive', location: 'Delhi, India', type: 'Full-time', experience: '2-4 Years', description: 'Expand our wholesale network, acquire new B2B accounts, and maintain strong relationships with key clients.' },
-  { id: 4, title: 'Digital Marketing Specialist', location: 'Remote', type: 'Full-time', experience: '3+ Years', description: 'Drive our online presence, manage social media campaigns, and optimize e-commerce conversion rates.' },
+  { id: 1, title: 'Retail Operations Manager', location: 'Mumbai, India', salary: '₹6,00,000 - ₹9,00,000 P.A.', description: 'Oversee store operations, manage staff, and ensure a premium customer experience across our flagship retail outlets.' },
+  { id: 2, title: 'Senior Fabric Technologist', location: 'Surat, India', salary: '₹8,00,000 - ₹12,00,000 P.A.', description: 'Lead quality control for incoming fabrics, develop new textile blends, and maintain material excellence.' },
+  { id: 3, title: 'B2B Sales Executive', location: 'Delhi, India', salary: '₹3,50,000 - ₹5,00,000 P.A.', description: 'Expand our wholesale network, acquire new B2B accounts, and maintain strong relationships with key clients.' },
+  { id: 4, title: 'Digital Marketing Specialist', location: 'Remote', salary: '₹4,00,000 - ₹7,00,000 P.A.', description: 'Drive our online presence, manage social media campaigns, and optimize e-commerce conversion rates.' },
 ];
 
 export default function Career() {
@@ -64,7 +64,7 @@ export default function Career() {
                 <div className="flex flex-col gap-3 mb-6">
                   {[
                     { icon: MapPin, val: job.location },
-                    { icon: Briefcase, val: `${job.type} · ${job.experience}` },
+                    { icon: Briefcase, val: job.salary },
                     { icon: Clock, val: 'Apply by June 30, 2026' },
                   ].map(({ icon: Icon, val }) => (
                     <div key={val} style={{ color: C.stone }} className="flex items-center gap-2.5 text-[13px] font-medium">

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Gavel, UploadCloud, Send, Mail, Clock, TrendingUp } from 'lucide-react';
 
@@ -23,7 +24,7 @@ const auctions = [
     currentBid: "₹2,80,000",
     bidsCount: 8,
     closingTime: "June 20, 2026 · 17:00 IST",
-    image: "https://images.unsplash.com/photo-1576016770956-debb63d90029?w=600&auto=format&fit=crop&q=60",
+    image: "https://images.pexels.com/photos/18359546/pexels-photo-18359546.jpeg",
     status: 'active',
   },
   {
@@ -35,7 +36,7 @@ const auctions = [
     currentBid: "₹1,95,000",
     bidsCount: 4,
     closingTime: "June 24, 2026 · 14:00 IST",
-    image: "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=600&auto=format&fit=crop&q=60",
+    image: "https://images.pexels.com/photos/36226283/pexels-photo-36226283.jpeg",
     status: 'active',
   },
   {
@@ -47,12 +48,14 @@ const auctions = [
     currentBid: "₹3,20,000",
     bidsCount: 0,
     closingTime: "June 28, 2026 · 11:00 IST",
-    image: "https://images.unsplash.com/photo-1605697040924-852290f6768a?w=600&auto=format&fit=crop&q=60",
+    image: "https://images.pexels.com/photos/6358804/pexels-photo-6358804.jpeg",
     status: 'new',
   }
 ];
 
 export default function EAuction() {
+  const [fileName, setFileName] = useState('');
+
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif", background: C.bg, minHeight: '100vh' }}>
 
@@ -110,20 +113,6 @@ export default function EAuction() {
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                     loading="lazy"
                   />
-                  <div style={{ position: 'absolute', top: 12, left: 12, display: 'flex', gap: 6 }}>
-                    <span style={{
-                      fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em',
-                      padding: '3px 10px', borderRadius: 20,
-                      background: C.soil, color: 'white', fontWeight: 400,
-                    }}>{auction.id}</span>
-                    {auction.status === 'new' && (
-                      <span style={{
-                        fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em',
-                        padding: '3px 10px', borderRadius: 20,
-                        background: C.accent, color: 'white', fontWeight: 400,
-                      }}>New</span>
-                    )}
-                  </div>
                 </div>
 
                 {/* Content */}
@@ -131,49 +120,14 @@ export default function EAuction() {
                   <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 600, color: C.soil, margin: '0 0 8px' }}>
                     {auction.title}
                   </h3>
-                  <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: '0 0 16px', fontWeight: 400 }}>
+                  <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: '0 0 16px', fontWeight: 400, flex: 1 }}>
                     {auction.description}
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 14, padding: '10px 0', borderTop: `1px dashed ${C.border}` }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '10px 0', borderTop: `1px dashed ${C.border}` }}>
                     <Clock size={13} color={C.primaryLight} />
                     <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>Closes: {auction.closingTime}</span>
                   </div>
-
-                  <div className="grid grid-cols-2 gap-3 mb-4 p-3 rounded-xl" style={{ background: C.sand }}>
-                    {[
-                      { label: 'Quantity', val: auction.quantity },
-                      { label: 'Reserve Price', val: auction.reservePrice },
-                      { label: 'Current Bid', val: auction.currentBid, highlight: true },
-                      { label: 'Bids Placed', val: `${auction.bidsCount} bids` },
-                    ].map(({ label, val, highlight }) => (
-                      <div key={label}>
-                        <span style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em', color: C.stone, display: 'block', marginBottom: 2, fontWeight: 400 }}>
-                          {label}
-                        </span>
-                        <span style={{ fontSize: 13, color: highlight ? C.accent : C.soil, fontWeight: highlight ? 600 : 400 }}>
-                          {val}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    onClick={() => document.getElementById('auction-reg-form')?.scrollIntoView({ behavior: 'smooth' })}
-                    style={{
-                      width: '100%', padding: '11px',
-                      background: C.primary, color: 'white',
-                      border: 'none', borderRadius: 10,
-                      fontSize: 13, fontWeight: 500,
-                      cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                      transition: 'all 0.2s ease',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.background = C.accent}
-                    onMouseLeave={e => e.currentTarget.style.background = C.primary}
-                  >
-                    <TrendingUp size={14} /> Register to Bid
-                  </button>
                 </div>
               </div>
             ))}
@@ -224,7 +178,7 @@ export default function EAuction() {
                   {[
                     { label: 'Name of the Participant *', type: 'text' },
                     { label: 'Legal Name of Business *', type: 'text' },
-                    { label: 'Business Address with PIN Code *', type: 'text' },
+                    { label: 'Business Address with Pin Code *', type: 'text' },
                     { label: 'GST No.', type: 'text' },
                     { label: 'Mobile No. *', type: 'tel' },
                     { label: 'Email ID *', type: 'email' },
@@ -241,7 +195,7 @@ export default function EAuction() {
                 {/* Upload */}
                 <div>
                   <label style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.15em', color: C.stone, display: 'block', marginBottom: 8, fontWeight: 400 }}>
-                    Upload GST Certificate
+                    Upload GST Certificate *
                   </label>
                   <label style={{
                     width: '100%', border: `2px dashed ${C.border}`,
@@ -253,10 +207,18 @@ export default function EAuction() {
                     onMouseEnter={e => { e.currentTarget.style.borderColor = C.primaryLight; e.currentTarget.style.background = 'rgba(71, 86, 67, 0.05)'; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = C.linen; }}
                   >
-                    <input type="file" className="hidden" accept=".pdf,.jpg,.jpeg,.png" />
+                    <input type="file" className="hidden" accept=".pdf,.jpg,.jpeg,.png" onChange={e => {
+                      if (e.target.files && e.target.files[0]) {
+                        setFileName(e.target.files[0].name);
+                      }
+                    }} />
                     <UploadCloud size={30} color={C.primaryLight} strokeWidth={1.5} style={{ marginBottom: 10 }} />
-                    <p style={{ fontSize: 14, color: C.soil, margin: '0 0 4px', fontWeight: 400 }}>Click to upload GST Certificate</p>
-                    <p style={{ fontSize: 11, color: C.stone, margin: 0, fontWeight: 400 }}>PDF, JPG, PNG accepted</p>
+                    <p style={{ fontSize: 14, color: C.soil, margin: '0 0 4px', fontWeight: 400 }}>
+                      {fileName ? `Selected: ${fileName}` : 'Click to upload GST Certificate'}
+                    </p>
+                    <p style={{ fontSize: 11, color: C.stone, margin: 0, fontWeight: 400 }}>
+                      {fileName ? 'Click again to change file' : 'PDF, JPG, PNG accepted'}
+                    </p>
                   </label>
                 </div>
 
@@ -274,13 +236,6 @@ export default function EAuction() {
                 >
                   <Send size={15} /> Submit Registration
                 </button>
-
-                <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                  <Mail size={13} color={C.primaryLight} />
-                  <a href="mailto:info@indianfabrichouse.com" style={{ fontSize: 12, color: C.primary, fontWeight: 400, textDecoration: 'none' }}>
-                    info@indianfabrichouse.com
-                  </a>
-                </div>
               </form>
             </div>
           </div>
