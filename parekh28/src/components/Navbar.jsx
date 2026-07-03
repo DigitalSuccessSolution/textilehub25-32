@@ -261,7 +261,7 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 top-[73px] z-40 flex flex-col border-t"
+          className="md:hidden absolute inset-x-0 top-full h-[100dvh] z-40 flex flex-col border-t"
           style={{ background: '#faf8fc', fontFamily: "'DM Sans', sans-serif", borderColor: C.border }}
         >
           <div className="flex-1 overflow-y-auto px-4 py-6 pb-28 space-y-2">
