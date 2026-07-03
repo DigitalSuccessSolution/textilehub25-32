@@ -47,9 +47,9 @@ export default function Navbar() {
 
   const dropdownNavItems = [
     { name: 'Trade Circular', path: '/trade-circular' },
-    { name: 'Blog Page', path: '/blog' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Notice Board', path: '/notice-board' },
-    { name: 'Career Page', path: '/career' },
+    { name: 'Career', path: '/career' },
     { name: 'Customer Review', path: '/reviews' },
     { name: 'Business Media Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' }
@@ -71,6 +71,12 @@ export default function Navbar() {
     return dropdownNavItems.some(item => isItemActive(item));
   };
 
+  useEffect(() => {
+    if (isOpen && isDropdownActive()) {
+      setMobileResourcesOpen(true);
+    }
+  }, [isOpen, location.pathname]);
+
   return (
     <header
       className="w-full fixed top-0 left-0 z-50 transition-all duration-300"
@@ -78,7 +84,7 @@ export default function Navbar() {
     >
       {/* ── Main Navbar (Row 1) ── */}
       <div
-        className={`w-full transition-all duration-300 ${scrolled ? 'py-2.5 shadow-sm' : 'py-4'}`}
+        className={`relative z-50 w-full transition-all duration-300 ${scrolled ? 'py-2.5 shadow-sm' : 'py-4'}`}
         style={{
           background: scrolled ? 'rgba(250, 248, 245, 0.98)' : '#faf8f5',
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
@@ -256,21 +262,12 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 top-[70px] z-40 flex flex-col"
+          className="md:hidden fixed inset-0 top-0 z-40 flex flex-col pt-[72px]"
           style={{ background: '#faf8f5', fontFamily: "'DM Sans', sans-serif" }}
         >
           <div className="h-[2px] w-full" style={{ background: `linear-gradient(90deg, ${C.primary}, ${C.accent}, ${C.primary})` }} />
 
           <div className="flex-1 overflow-y-auto px-5 py-6 pb-28 space-y-2">
-            <div className="px-3 mb-4 pb-4" style={{ borderBottom: `1px solid ${C.border}` }}>
-              <p className="font-bold text-xl" style={{ color: C.soil, fontFamily: "'Playfair Display', serif" }}>
-                Fashion Heritage
-              </p>
-              <p className="text-[9px] tracking-wider uppercase mt-1 font-semibold text-accent">
-                Textile & Artistry Mall
-              </p>
-            </div>
-
             <div className="grid grid-cols-1 gap-1.5">
               {directNavItems.map((item) => {
                 const active = isItemActive(item);

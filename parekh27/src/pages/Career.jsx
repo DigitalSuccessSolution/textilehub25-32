@@ -26,7 +26,7 @@ export default function Career() {
       
 
       {/* Main Content (4 Divs in 1 Row on desktop) */}
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 text-left pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 text-left pt-16 md:pt-32 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">

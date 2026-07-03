@@ -10,6 +10,7 @@ const C = {
   linen: '#FAF5EC',
   border: '#ebdff2',
   stone: '#66587c',
+  accent: '#e37a6b',
 };
 
 export default function TradeEnquiry() {
@@ -18,7 +19,7 @@ export default function TradeEnquiry() {
 
       
 
-      <div className="max-w-3xl mx-auto px-6 pt-32 pb-24">
+      <div className="max-w-3xl mx-auto px-6 pt-10 md:pt-14 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">
@@ -128,14 +129,14 @@ export default function TradeEnquiry() {
                 style={{
                   width: '100%', padding: '14px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                  background: C.soil, color: 'white',
+                  background: C.accent, color: 'white',
                   border: 'none', borderRadius: 12,
                   fontSize: 14, fontWeight: 400,
                   cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
                   transition: 'all 0.2s ease',
                 }}
                 onMouseEnter={e => e.currentTarget.style.background = C.primary}
-                onMouseLeave={e => e.currentTarget.style.background = C.soil}
+                onMouseLeave={e => e.currentTarget.style.background = C.accent}
               >
                 <Send size={15} /> Submit Trade Enquiry
               </button>

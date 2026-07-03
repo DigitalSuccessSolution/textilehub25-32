@@ -14,7 +14,7 @@ const C = {
 const footerLinks = {
   'Quick Links': [
     { name: 'About Us', path: '/about' },
-    { name: 'Product Gallery', path: '/products' },
+    { name: 'Product', path: '/products' },
     { name: 'Trade Services', path: '/retail-management' },
     { name: 'Trade Enquiry', path: '/trade-enquiry' },
     { name: 'e-Quotation', path: '/e-quotation' },
@@ -24,7 +24,7 @@ const footerLinks = {
     { name: 'Trade Circular', path: '/trade-circular' },
     { name: 'Blog', path: '/blog' },
     { name: 'Notice Board', path: '/notice-board' },
-    { name: 'Careers', path: '/career' },
+    { name: 'Career', path: '/career' },
     { name: 'Customer Reviews', path: '/reviews' },
   ],
   'Help & Support': [
@@ -37,7 +37,7 @@ export default function Footer() {
   return (
     <footer style={{ background: C.primary, color: '#faf8f5', fontFamily: "'DM Sans', sans-serif" }}>
       <div className="max-w-[90rem] mx-auto px-6 lg:px-14 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-12 text-left">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-y-10 gap-x-4 sm:gap-12 text-left">
           
           {/* Brand Column */}
           <div className="col-span-2 lg:col-span-2">

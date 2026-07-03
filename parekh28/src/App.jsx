@@ -99,29 +99,13 @@ function WelcomePopup() {
               boxShadow: '0 32px 80px rgba(44, 30, 67, 0.18)',
             }}
           >
-            {/* Left Column (Image) - visible on md+ */}
-            <div className="hidden md:block md:col-span-5 relative h-full min-h-[380px] bg-stone-100 border-r animate-fade-in" style={{ borderColor: C.border }}>
-              <img
-                src="/images/new_arrivals_fabrics.png"
-                alt="Loom & Luxury Premium Fabrics"
-                className="absolute inset-0 w-full h-full object-cover animate-pulse-slow"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2c1e43]/60 via-transparent to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 text-left">
-                <span className="text-white/80 text-[10px] font-bold tracking-[0.2em] uppercase">Premium Silk</span>
-                <h4 className="text-white text-lg font-bold leading-tight mt-1" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Loom & Luxury
-                </h4>
-              </div>
-            </div>
-
-            {/* Right Column (Form & Details) */}
-            <div className="col-span-1 md:col-span-7 p-6 sm:p-8 flex flex-col justify-center text-left relative">
+            {/* Form & Details Column (Left side now) */}
+            <div className="col-span-1 md:col-span-7 p-6 sm:p-8 flex flex-col justify-center text-left relative order-2 md:order-1">
               
               {/* Close button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center border transition-colors cursor-pointer"
+                className="absolute top-4 right-4 md:right-auto md:left-4 w-8 h-8 rounded-full flex items-center justify-center border transition-colors cursor-pointer z-20"
                 style={{
                   background: 'rgba(116,91,159,0.06)',
                   borderColor: C.border,
@@ -131,27 +115,14 @@ function WelcomePopup() {
                 <X size={15} />
               </button>
 
-              {/* Tag */}
-              <div className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full mb-4 border"
-                style={{
-                  background: 'rgba(227, 122, 107, 0.08)',
-                  borderColor: 'rgba(227, 122, 107, 0.2)',
-                }}
-              >
-                <Tag size={11} style={{ color: C.accent }} />
-                <span style={{ fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: C.accent, fontWeight: 700 }}>
-                  Exclusive Welcome Offer
-                </span>
-              </div>
-
               {/* Title */}
-              <h3 className="text-2xl sm:text-3xl font-bold mb-3" style={{ fontFamily: "'Playfair Display', serif", color: C.soil }}>
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 mt-6 md:mt-0" style={{ fontFamily: "'Playfair Display', serif", color: C.soil }}>
                 Loom & Luxury<br />
                 <span style={{ fontStyle: 'italic', color: C.accent, fontWeight: 500 }}>Pure Artistry & Design</span>
               </h3>
 
               <p className="text-xs sm:text-[13px] leading-relaxed mb-5" style={{ color: C.stone }}>
-                Join our exclusive circle to receive updates on premium sarees, traditional handlooms, new launches, and boutique member discounts.
+                Join our exclusive circle to receive updates on premium sarees, traditional handlooms, and new launches.
               </p>
 
               {/* Stars */}
@@ -177,52 +148,23 @@ function WelcomePopup() {
                   }}
                 >
                   Thank you! You've subscribed successfully.
-                  <span className="block text-xs mt-1.5 font-normal" style={{ color: C.stone }}>
-                    Use code <strong style={{ color: C.accent }}>LOOM10</strong> at check-out.
-                  </span>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubscribe} className="space-y-4">
-                  {/* Coupon Box */}
-                  <div className="rounded-xl p-3 text-center border border-dashed"
-                    style={{
-                      background: C.sand,
-                      borderColor: C.accent,
-                    }}
-                  >
-                    <span className="text-[14px] font-bold block" style={{ color: C.soil }}>
-                      Get 10% Off Your First Purchase
-                    </span>
-                    <span className="text-[10px] uppercase tracking-wider block mt-1" style={{ color: C.stone }}>
-                      Use Code: <strong style={{ color: C.accent }}>LOOM10</strong>
-                    </span>
-                  </div>
-
-                  {/* Input field and buttons */}
+                <div className="space-y-4">
+                  {/* Buttons */}
                   <div className="flex flex-col gap-2">
-                    <input
-                      type="email"
-                      required
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl outline-none text-xs border bg-white"
-                      style={{
-                        borderColor: C.border,
-                        color: C.soil,
-                      }}
-                    />
-                    <div className="flex gap-2.5 mt-1">
-                      <button
-                        type="submit"
-                        className="flex-2 py-3 rounded-full text-xs font-bold text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                        style={{ background: C.primary }}
-                      >
-                        Subscribe Now <ArrowRight size={13} />
-                      </button>
+                    <div className="flex gap-2.5 mt-1 w-full">
                       <button
                         type="button"
                         onClick={() => { setIsOpen(false); navigate('/products'); }}
+                        className="flex-[2] py-3 rounded-full text-xs font-bold text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                        style={{ background: C.primary }}
+                      >
+                        Explore Now <ArrowRight size={13} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsOpen(false)}
                         className="flex-1 py-3 rounded-full text-xs font-semibold border transition-colors cursor-pointer"
                         style={{
                           borderColor: C.border,
@@ -233,9 +175,25 @@ function WelcomePopup() {
                       </button>
                     </div>
                   </div>
-                </form>
+                </div>
               )}
 
+            </div>
+
+            {/* Image Column (Right side now) */}
+            <div className="block md:col-span-5 relative w-full min-h-[220px] md:min-h-[380px] bg-stone-100 md:border-l animate-fade-in order-1 md:order-2" style={{ borderColor: C.border }}>
+              <img
+                src="https://images.pexels.com/photos/14789186/pexels-photo-14789186.jpeg"
+                alt="Loom & Luxury Premium Fabrics"
+                className="absolute inset-0 w-full h-full object-cover animate-pulse-slow"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2c1e43]/60 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6 text-left">
+                <span className="text-white/80 text-[10px] font-bold tracking-[0.2em] uppercase">Premium Silk</span>
+                <h4 className="text-white text-lg font-bold leading-tight mt-1" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  Loom & Luxury
+                </h4>
+              </div>
             </div>
           </motion.div>
         </div>

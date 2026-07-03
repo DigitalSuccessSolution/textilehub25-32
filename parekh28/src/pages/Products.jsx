@@ -26,14 +26,14 @@ const allProducts = [
   { id: 102, name: "Super-Stretch Cotton Leggings", category: "Leggings", image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=600&auto=format&fit=crop&q=60" },
   { id: 103, name: "Handcrafted Chikankari Kurti", category: "Kurtis", image: "https://images.unsplash.com/photo-1741847639057-b51a25d42892?w=600&auto=format&fit=crop&q=60" },
   { id: 104, name: "Anarkali Embroidered Dress Suit", category: "Dress Suits", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&auto=format&fit=crop&q=60" },
-  { id: 105, name: "Luxurious Egyptian Cotton Bedsheet", category: "Bedsheets & Linen", image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&auto=format&fit=crop&q=60" },
+  { id: 105, name: "Luxurious Egyptian Cotton Bedsheet", category: "Bedsheets & Linen", image: "https://images.pexels.com/photos/7746574/pexels-photo-7746574.jpeg" },
   { id: 106, name: "Soft Premium Cotton Hosiery Set", category: "Hosiery Items", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&auto=format&fit=crop&q=60" },
   { id: 107, name: "Italian Wool Blend Suiting Fabric", category: "Suiting", image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&auto=format&fit=crop&q=60" },
   { id: 108, name: "Fine Egyptian Giza Cotton Shirting", category: "Shirting", image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600&auto=format&fit=crop&q=60" },
-  { id: 109, name: "Designer Georgette Lehenga Choli", category: "Formal & Ethnic Wear for Women", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=60" },
-  { id: 110, name: "Premium Silk Sherwani Set", category: "Formal & Ethnic Wear for Men", image: "https://images.unsplash.com/photo-1724856604249-ca73680262e8?w=600&auto=format&fit=crop&q=60" },
+  { id: 109, name: "Designer Georgette Lehenga Choli", category: "Formal & Ethnic Wear for Women", image: "https://images.pexels.com/photos/16803130/pexels-photo-16803130.jpeg" },
+  { id: 110, name: "Premium Silk Sherwani Set", category: "Formal & Ethnic Wear for Men", image: "https://images.pexels.com/photos/16199169/pexels-photo-16199169.jpeg" },
   { id: 111, name: "Kid's Festive Cotton Dhoti Kurta", category: "Formal & Ethnic Wear for Children", image: "https://images.unsplash.com/photo-1741992556912-3b2d62461e75?w=600&auto=format&fit=crop&q=60" },
-  { id: 112, name: "Premium Velvet Upholstery Fabric", category: "Home Upholstery & Furnishing", image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&auto=format&fit=crop&q=60" },
+  { id: 112, name: "Premium Velvet Upholstery Fabric", category: "Home Upholstery & Furnishing", image: "https://images.pexels.com/photos/35009336/pexels-photo-35009336.jpeg" },
 ];
 
 export default function Products() {
@@ -59,7 +59,7 @@ export default function Products() {
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-10 md:pt-14 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">
@@ -118,21 +118,21 @@ export default function Products() {
 
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
             {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(index * 0.04, 0.3) }}
-                className="card-hover"
+                className="card-hover flex flex-col"
                 style={{
                   borderRadius: 16, overflow: 'hidden',
                   background: 'white',
                   border: `1px solid ${C.border}`,
                 }}
               >
-                <div style={{ height: 240, overflow: 'hidden', position: 'relative' }}>
+                <div className="h-[160px] sm:h-[240px] relative overflow-hidden shrink-0">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -142,30 +142,31 @@ export default function Products() {
                     onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                   />
                 </div>
-                <div style={{ padding: '16px 18px', borderTop: `1px solid ${C.border}` }}>
+                <div className="p-3 sm:px-[18px] sm:py-[16px] flex flex-col flex-1" style={{ borderTop: `1px solid ${C.border}` }}>
                   <span style={{
-                    fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.18em',
-                    color: C.primary, fontWeight: 400, display: 'block', marginBottom: 6,
-                  }}>
+                    fontSize: 8, textTransform: 'uppercase', letterSpacing: '0.12em',
+                    color: C.primary, fontWeight: 400, display: 'block', marginBottom: 4,
+                  }} className="sm:text-[9px] sm:tracking-[0.18em] sm:mb-1.5 truncate">
                     {product.category}
                   </span>
-                  <h3 style={{ fontSize: 14, fontWeight: 500, color: C.soil, margin: '0 0 12px', lineHeight: 1.4 }}>
+                  <h3 style={{ fontWeight: 500, color: C.soil, margin: '0 0 10px', lineHeight: 1.3 }} className="text-[12px] sm:text-[14px] sm:mb-3">
                     {product.name}
                   </h3>
-                  <button
-                    style={{
-                      width: '100%', padding: '9px 14px',
-                      borderRadius: 10, fontSize: 12, fontWeight: 400,
-                      cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                      border: `1.5px solid ${C.border}`,
-                      background: 'transparent', color: C.stone,
-                      transition: 'all 0.2s ease',
-                    }}
-                    onMouseEnter={e => { e.currentTarget.style.background = C.soil; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = C.soil; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.stone; e.currentTarget.style.borderColor = C.border; }}
-                  >
-                    View Details
-                  </button>
+                  <div className="mt-auto">
+                    <button
+                      className="w-full py-1.5 sm:py-[9px] px-2 sm:px-[14px] rounded-lg sm:rounded-[10px] text-[10.5px] sm:text-[12px] transition-all duration-200"
+                      style={{
+                        fontWeight: 400,
+                        cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
+                        border: `1.5px solid ${C.border}`,
+                        background: 'transparent', color: C.stone,
+                      }}
+                      onMouseEnter={e => { e.currentTarget.style.background = C.soil; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = C.soil; }}
+                      onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.stone; e.currentTarget.style.borderColor = C.border; }}
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             ))}

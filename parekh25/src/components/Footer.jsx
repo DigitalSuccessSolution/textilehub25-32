@@ -14,7 +14,7 @@ const C = {
 const footerLinks = {
   Company: [
     { name: 'About Us', path: '/about' },
-    { name: 'Products', path: '/products' },
+    { name: 'Product', path: '/products' },
     { name: 'Trade Enquiry', path: '/trade-enquiry' },
     { name: 'Career', path: '/career' },
     { name: 'Contact Us', path: '/contact' },

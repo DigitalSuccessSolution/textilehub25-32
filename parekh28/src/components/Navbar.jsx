@@ -18,23 +18,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [isOpen]);
-
   const directNavItems = [
     { name: 'Home', path: '/' },
     { name: 'About us', path: '/about' },
@@ -47,9 +30,9 @@ export default function Navbar() {
 
   const dropdownNavItems = [
     { name: 'Trade Circular', path: '/trade-circular' },
-    { name: 'Blog Page', path: '/blog' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Notice Board', path: '/notice-board' },
-    { name: 'Career Page', path: '/career' },
+    { name: 'Career', path: '/career' },
     { name: 'Customer Review', path: '/reviews' },
     { name: 'Business Media Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' }
@@ -70,6 +53,26 @@ export default function Navbar() {
   const isDropdownActive = () => {
     return dropdownNavItems.some(item => isItemActive(item));
   };
+
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(isDropdownActive());
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      if (isDropdownActive()) {
+        setMobileResourcesOpen(true);
+      }
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
   return (
     <header
@@ -122,17 +125,17 @@ export default function Navbar() {
               to="/trade-enquiry"
               className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] font-bold tracking-wider uppercase transition-all duration-300 shadow-sm"
               style={{
-                background: C.primary,
+                background: C.accent,
                 color: '#faf8fc',
-                border: `1.5px solid ${C.primary}`,
+                border: `1.5px solid ${C.accent}`,
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = C.accent;
-                e.currentTarget.style.borderColor = C.accent;
-              }}
-              onMouseLeave={e => {
                 e.currentTarget.style.background = C.primary;
                 e.currentTarget.style.borderColor = C.primary;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = C.accent;
+                e.currentTarget.style.borderColor = C.accent;
               }}
             >
               <Phone size={12} fill="currentColor" stroke="none" />
@@ -258,22 +261,12 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 top-[70px] z-40 flex flex-col"
-          style={{ background: '#faf8fc', fontFamily: "'DM Sans', sans-serif" }}
+          className="md:hidden fixed inset-0 top-[73px] z-40 flex flex-col border-t"
+          style={{ background: '#faf8fc', fontFamily: "'DM Sans', sans-serif", borderColor: C.border }}
         >
-          <div className="h-[2px] w-full" style={{ background: `linear-gradient(90deg, ${C.primary}, ${C.accent}, ${C.primary})` }} />
-
-          <div className="flex-1 overflow-y-auto px-5 py-6 pb-28 space-y-2">
-            <div className="px-3 mb-4 pb-4" style={{ borderBottom: `1px solid ${C.border}` }}>
-              <p className="font-bold text-xl" style={{ color: C.soil, fontFamily: "'Playfair Display', serif" }}>
-                Loom & Luxury
-              </p>
-              <p className="text-[9px] tracking-wider uppercase mt-1 font-semibold text-accent">
-                Textile & Artistry Mall
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-1.5">
+          <div className="flex-1 overflow-y-auto px-4 py-6 pb-28 space-y-2">
+            
+            <div className="grid grid-cols-1 gap-1">
               {directNavItems.map((item) => {
                 const active = isItemActive(item);
                 return (
@@ -281,17 +274,16 @@ export default function Navbar() {
                     key={item.name}
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-bold tracking-wide border transition-all ${
+                    className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-[13px] font-bold tracking-wide transition-all ${
                       item.name.toLowerCase().startsWith('e-') ? 'normal-case' : 'uppercase'
                     }`}
                     style={{
-                      background: active ? 'rgba(227,122,107,0.05)' : '#ffffff',
-                      borderColor: active ? C.accent : C.border,
-                      color: active ? C.accent : C.soil,
+                      background: active ? 'rgba(116,91,159,0.08)' : 'transparent',
+                      color: active ? C.primary : C.soil,
                     }}
                   >
                     <span>{item.name}</span>
-                    {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.accent }} />}
+                    {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.primary }} />}
                   </Link>
                 );
               })}
@@ -300,11 +292,10 @@ export default function Navbar() {
               <div className="w-full">
                 <button
                   onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-                  className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-bold uppercase tracking-wide border transition-all cursor-pointer"
+                  className="w-full flex items-center justify-between px-4 py-3.5 rounded-xl text-[13px] font-bold uppercase tracking-wide transition-all cursor-pointer"
                   style={{
-                    background: '#ffffff',
-                    borderColor: isDropdownActive() ? C.accent : C.border,
-                    color: isDropdownActive() ? C.accent : C.soil,
+                    background: isDropdownActive() ? 'rgba(116,91,159,0.08)' : 'transparent',
+                    color: isDropdownActive() ? C.primary : C.soil,
                   }}
                 >
                   <span>Resources</span>
@@ -318,7 +309,8 @@ export default function Navbar() {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      className="overflow-hidden mt-1.5 space-y-1.5 pl-3"
+                      className="overflow-hidden mt-1 space-y-1 pl-3 border-l-2 ml-4 mb-2"
+                      style={{ borderColor: 'rgba(116,91,159,0.15)' }}
                     >
                       {dropdownNavItems.map((item) => {
                         const active = isItemActive(item);
@@ -330,15 +322,14 @@ export default function Navbar() {
                               setIsOpen(false);
                               setMobileResourcesOpen(false);
                             }}
-                            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[12px] font-bold uppercase tracking-wide border transition-all"
+                            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[12px] font-bold uppercase tracking-wide transition-all"
                             style={{
-                              background: active ? 'rgba(227,122,107,0.03)' : '#ffffff',
-                              borderColor: active ? C.accent : C.border,
-                              color: active ? C.accent : C.soil,
+                              background: active ? 'rgba(116,91,159,0.05)' : 'transparent',
+                              color: active ? C.primary : C.stone,
                             }}
                           >
                             <span>{item.name}</span>
-                            {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.accent }} />}
+                            {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.primary }} />}
                           </Link>
                         );
                       })}
@@ -348,12 +339,14 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="pt-4">
+            <div className="pt-6 px-2">
               <Link
                 to="/trade-enquiry"
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 py-3 rounded-full text-sm font-bold uppercase tracking-wider text-white"
-                style={{ background: C.primary }}
+                className="flex items-center justify-center gap-2 py-3.5 rounded-full text-[13px] font-bold uppercase tracking-wider text-white shadow-sm transition-colors"
+                style={{ background: C.accent }}
+                onMouseEnter={e => e.currentTarget.style.background = C.primary}
+                onMouseLeave={e => e.currentTarget.style.background = C.accent}
               >
                 <Phone size={13} fill="currentColor" stroke="none" />
                 Trade Enquiry

@@ -21,7 +21,7 @@ export default function About() {
       
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 text-left pt-32 pb-24">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 text-left pt-10 md:pt-14 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">
@@ -69,7 +69,7 @@ export default function About() {
               }}
             >
               <img
-                src="/images/about.png"
+                src="https://images.pexels.com/photos/8311880/pexels-photo-8311880.jpeg"
                 alt="Loom & Luxury Artisans & Textiles"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
               />

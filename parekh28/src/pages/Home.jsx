@@ -98,6 +98,20 @@ export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  const heroImages = [
+    "/images/hero_loom_luxury.png",
+    "https://images.pexels.com/photos/37080697/pexels-photo-37080697.jpeg",
+    "https://images.pexels.com/photos/6069072/pexels-photo-6069072.jpeg"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const nextSlide = () => {
     setCarouselIndex((prev) => (prev + 1) % (popularCollections.length - 2));
@@ -118,7 +132,7 @@ export default function Home() {
     <div style={{ background: C.bg, fontFamily: "'DM Sans', sans-serif" }} className="w-full overflow-x-hidden pt-[30px] md:pt-[40px]">
       
       {/* ── 1. REDESIGNED HERO SECTION ── */}
-      <section className="relative pt-4 md:pt-6 pb-12 px-6 sm:px-8 lg:px-14 flex items-center min-h-[460px]" style={{ background: 'linear-gradient(135deg, #fdfafd 0%, #f7f3fb 100%)' }}>
+      <section className="relative pt-4 md:pt-6 pb-12 px-4 sm:px-6 lg:px-14 flex items-center min-h-[460px]" style={{ background: 'linear-gradient(135deg, #fdfafd 0%, #f7f3fb 100%)' }}>
         {/* Background Subtle Shape Grid */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#745b9f 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }} />
 
@@ -127,13 +141,13 @@ export default function Home() {
           {/* Left Column: Typography & CTAs */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <h1 
-              className="text-4xl sm:text-5xl lg:text-[58px] leading-tight font-medium mb-1"
+              className="text-[32px] leading-tight sm:text-4xl lg:text-[58px] font-medium mb-1"
               style={{ color: C.soil, fontFamily: "'Playfair Display', serif" }}
             >
               Weave Stories.
             </h1>
             <h1 
-              className="text-4xl sm:text-5xl lg:text-[58px] leading-tight font-medium mb-4"
+              className="text-[32px] leading-tight sm:text-4xl lg:text-[58px] font-medium mb-4"
               style={{ color: C.accent, fontFamily: "'Playfair Display', serif" }}
             >
               Wear Tradition.
@@ -157,17 +171,17 @@ export default function Home() {
                 to="/products"
                 className="px-8 py-4 rounded-full font-bold tracking-wider text-[11px] uppercase transition-all duration-300 shadow-md flex items-center gap-2"
                 style={{
-                  background: C.primary,
+                  background: C.accent,
                   color: '#ffffff',
-                  border: `1.5px solid ${C.primary}`
+                  border: `1.5px solid ${C.accent}`
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.background = C.accent;
-                  e.currentTarget.style.borderColor = C.accent;
-                }}
-                onMouseLeave={e => {
                   e.currentTarget.style.background = C.primary;
                   e.currentTarget.style.borderColor = C.primary;
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = C.accent;
+                  e.currentTarget.style.borderColor = C.accent;
                 }}
               >
                 Explore Collections
@@ -204,11 +218,18 @@ export default function Home() {
                   background: C.sand
                 }}
               >
-                <img 
-                  src="/images/hero_loom_luxury.png" 
-                  alt="Loom & Luxury Traditional Saree Collection" 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-103" 
-                />
+                <AnimatePresence>
+                  <motion.img 
+                    key={heroImageIndex}
+                    src={heroImages[heroImageIndex]} 
+                    alt="Loom & Luxury Traditional Saree Collection" 
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
+                    className="absolute inset-0 w-full h-full object-cover" 
+                  />
+                </AnimatePresence>
               </div>
             </div>
           </div>
@@ -217,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* ── 2. NEW ARRIVALS SECTION ── */}
-      <section className="py-16 px-6 sm:px-8 lg:px-14">
+      <section className="py-16 px-4 sm:px-6 lg:px-14">
         <div className="max-w-[90rem] mx-auto">
           <div 
             className="relative w-full rounded-[24px] lg:rounded-[32px] overflow-hidden shadow-lg border flex flex-col lg:flex-row" 
@@ -279,7 +300,7 @@ export default function Home() {
             </div>
 
             {/* Right side fabric swatches image */}
-            <div className="lg:w-[62%] lg:-ml-[4%] w-full h-[300px] lg:h-auto z-0 relative overflow-hidden">
+            <div className="lg:w-[62%] lg:-ml-[4%] w-full h-[220px] sm:h-[300px] lg:h-auto z-0 relative overflow-hidden">
               <img 
                 src="/images/new_arrivals_fabrics.png" 
                 alt="Loom & Luxury Fabric Swatches" 
@@ -292,7 +313,7 @@ export default function Home() {
       </section>
 
       {/* ── 3. OUR SOLUTIONS SECTION (Empowering Your Textile Business) ── */}
-      <section className="py-20 px-6 sm:px-8 lg:px-14">
+      <section className="py-20 px-4 sm:px-6 lg:px-14">
         <div className="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Block */}
@@ -381,15 +402,15 @@ export default function Home() {
       </section>
 
       {/* ── 4. COUNTERS BANNER (Redesigned matching mockup) ── */}
-      <section className="py-10 px-6 sm:px-8 lg:px-14">
+      <section className="py-10 px-4 sm:px-6 lg:px-14">
         <div 
           style={{ background: '#8869aeff' }} 
-          className="max-w-[90rem] mx-auto rounded-[32px] py-12 px-8 lg:px-16 relative overflow-hidden shadow-md"
+          className="max-w-[90rem] mx-auto rounded-[24px] sm:rounded-[32px] py-10 px-6 sm:py-12 sm:px-8 lg:px-16 relative overflow-hidden shadow-md"
         >
           {/* Subtle watermark grid */}
-          <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
 
-          <div className="grid grid-cols-2 lg:flex lg:flex-row justify-between items-stretch gap-y-12 gap-x-6 lg:gap-2 w-full relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-row justify-between items-stretch gap-y-10 sm:gap-y-12 gap-x-6 lg:gap-2 w-full relative z-10">
             
             {/* Stat 1 */}
             <div className="flex flex-col items-start lg:pl-4">

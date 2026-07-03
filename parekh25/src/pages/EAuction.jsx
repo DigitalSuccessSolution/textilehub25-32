@@ -22,7 +22,7 @@ const auctions = [
     currentBid: "₹4,65,000",
     bidsCount: 12,
     closingTime: "July 05, 2026 · 17:00 IST",
-    image: "https://images.unsplash.com/photo-1606744824163-985d376605aa?w=600&auto=format&fit=crop&q=60",
+    image: "https://images.pexels.com/photos/18359546/pexels-photo-18359546.jpeg",
     status: 'active',
   },
   {
@@ -34,7 +34,7 @@ const auctions = [
     currentBid: "₹1,50,000",
     bidsCount: 5,
     closingTime: "July 08, 2026 · 14:00 IST",
-    image: "https://images.unsplash.com/photo-1574169208507-84376144848b?w=600&auto=format&fit=crop&q=60",
+    image: "https://images.pexels.com/photos/36226283/pexels-photo-36226283.jpeg",
     status: 'active',
   }
 ];

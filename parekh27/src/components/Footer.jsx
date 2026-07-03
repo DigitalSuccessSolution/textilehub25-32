@@ -24,7 +24,7 @@ const footerLinks = {
     { name: 'Trade Circular', path: '/trade-circular' },
     { name: 'Blog', path: '/blog' },
     { name: 'Notice Board', path: '/notice-board' },
-    { name: 'Careers', path: '/career' },
+    { name: 'Career', path: '/career' },
     { name: 'Customer Reviews', path: '/reviews' },
   ],
   'Help & Support': [

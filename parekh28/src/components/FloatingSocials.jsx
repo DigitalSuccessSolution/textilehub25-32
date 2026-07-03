@@ -49,7 +49,7 @@ export default function FloatingSocials() {
   ];
 
   return (
-    <div className="fixed left-0 top-[35%] z-[99] flex items-center">
+    <div className="fixed left-0 top-[35%] z-[99] hidden md:flex items-center">
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: isExpanded ? 0 : -60 }}

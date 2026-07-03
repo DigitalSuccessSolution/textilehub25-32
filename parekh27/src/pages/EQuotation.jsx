@@ -43,7 +43,7 @@ export default function EQuotation() {
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 sm:px-8 lg:px-14 pt-16 md:pt-32 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">
@@ -80,14 +80,13 @@ export default function EQuotation() {
               >
                 {/* ID + date row */}
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                  <span style={{
-                    fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.15em',
-                    padding: '4px 12px', borderRadius: 20,
-                    background: 'rgba(124, 142, 118,0.08)',
-                    color: C.primary, fontWeight: 400,
+                  <div style={{
+                    width: 32, height: 32, borderRadius: 8,
+                    background: 'rgba(124, 142, 118,0.1)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
                   }}>
-                    {item.id}
-                  </span>
+                    <FileText size={16} color={C.primary} />
+                  </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                     <Calendar size={12} color={C.stone} />
                     <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>{item.closingDate}</span>
@@ -97,37 +96,9 @@ export default function EQuotation() {
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 500, color: C.soil, margin: '0 0 10px' }}>
                   {item.title}
                 </h3>
-                <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: '0 0 16px', fontWeight: 400, flex: 1 }}>
+                <p style={{ fontSize: 13, color: C.stone, lineHeight: 1.6, margin: 0, fontWeight: 400, flex: 1 }}>
                   {item.specifications}
                 </p>
-
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  padding: '12px 14px', borderRadius: 10,
-                  background: C.sand, marginBottom: 14,
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Package size={14} color={C.primaryLight} />
-                    <span style={{ fontSize: 11, color: C.stone, fontWeight: 400 }}>Quantity Required</span>
-                  </div>
-                  <span style={{ fontSize: 14, color: C.soil, fontWeight: 500 }}>{item.quantity}</span>
-                </div>
-
-                <button
-                  onClick={() => document.getElementById('quote-form-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  style={{
-                    width: '100%', padding: '11px',
-                    background: C.primary, color: 'white',
-                    border: 'none', borderRadius: 10,
-                    fontSize: 13, fontWeight: 400,
-                    cursor: 'pointer', fontFamily: "'DM Sans', sans-serif",
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = C.accent}
-                  onMouseLeave={e => e.currentTarget.style.background = C.primary}
-                >
-                  Submit Bid
-                </button>
               </div>
             ))}
           </div>
@@ -229,12 +200,7 @@ export default function EQuotation() {
                   <Send size={15} /> Submit Quotation Request
                 </button>
 
-                <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
-                  <Mail size={13} color={C.primaryLight} />
-                  <a href="mailto:info@fashionheritage.com" style={{ fontSize: 12, color: C.primary, fontWeight: 400, textDecoration: 'none' }}>
-                    info@fashionheritage.com
-                  </a>
-                </div>
+
               </form>
             </div>
           </div>

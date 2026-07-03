@@ -24,7 +24,7 @@ const TradeCircular = () => {
 
       
 
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 pt-32 pb-24">
+      <div className="max-w-[90rem] mx-auto px-6 lg:px-14 pt-16 md:pt-32 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">

@@ -35,8 +35,6 @@ const C = {
 
 function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,21 +53,12 @@ function WelcomePopup() {
     return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (!email) return;
-    setSubscribed(true);
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 1800);
-  };
-
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-5">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-5">
           {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -77,192 +66,78 @@ function WelcomePopup() {
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
             className="absolute inset-0"
-            style={{ background: 'rgba(19,56,53,0.45)', backdropFilter: 'blur(6px)' }}
+            style={{ background: 'rgba(19,56,53,0.6)', backdropFilter: 'blur(8px)' }}
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+            className="relative flex flex-col md:flex-row overflow-hidden"
             style={{
-              position: 'relative',
               background: C.cream,
               borderRadius: 24,
-              border: `1.5px solid ${C.border}`,
-              maxWidth: 460,
+              border: `1px solid ${C.border}`,
+              maxWidth: 760,
               width: '100%',
-              fontFamily: "'DM Sans', sans-serif",
-              overflow: 'hidden',
               zIndex: 10,
-              boxShadow: '0 32px 80px rgba(19,56,53,0.18)',
+              boxShadow: '0 32px 80px rgba(19,56,53,0.25)',
+              fontFamily: "'DM Sans', sans-serif",
             }}
           >
-            {/* Decorative top band */}
-            <div style={{
-              background: `linear-gradient(135deg, ${C.primary}, ${C.primaryLight})`,
-              padding: '30px 32px 26px',
-              position: 'relative',
-              overflow: 'hidden',
-              borderBottom: `2.5px solid ${C.accent}`,
-            }}>
-              {/* Pattern */}
-              <div style={{
-                position: 'absolute', inset: 0,
-                backgroundImage: 'radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px)',
-                backgroundSize: '16px 16px',
-                opacity: 0.5
-              }} />
+            {/* Close Button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              style={{
+                position: 'absolute', top: 16, right: 16,
+                width: 32, height: 32, borderRadius: '50%',
+                background: 'rgba(255,255,255,0.9)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: C.soil, cursor: 'pointer', zIndex: 20,
+                border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+              }}
+            >
+              <X size={16} />
+            </button>
 
-              {/* Close button */}
-              <button
-                onClick={() => setIsOpen(false)}
-                style={{
-                  position: 'absolute', top: 14, right: 14,
-                  width: 32, height: 32, borderRadius: 50,
-                  background: 'rgba(255,255,255,0.12)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  color: 'white', cursor: 'pointer', zIndex: 5,
-                }}
-              >
-                <X size={15} />
-              </button>
-
-              {/* Header content */}
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  background: 'rgba(255,255,255,0.12)', borderRadius: 20,
-                  padding: '4px 12px', marginBottom: 12,
-                  border: '1px solid rgba(255,255,255,0.15)',
-                }}>
-                  <Tag size={11} color="#eae2d3" />
-                  <span style={{ fontSize: 9, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#eae2d3', fontWeight: 600 }}>
-                    Exclusive Welcome Offer
-                  </span>
-                </div>
-                <h3 style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 28, fontWeight: 600, color: 'white',
-                  lineHeight: 1.25, margin: 0,
-                }}>
-                  Fashion Heritage<br/>
-                  <span style={{ fontStyle: 'italic', color: '#f2ebe1', fontWeight: 500 }}>Artistry & Tradition</span>
-                </h3>
-              </div>
+            {/* Image Section */}
+            <div className="w-full md:w-5/12 h-56 md:h-auto relative">
+              <img 
+                src="https://images.pexels.com/photos/4622423/pexels-photo-4622423.jpeg" 
+                alt="Fashion Heritage" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </div>
 
-            {/* Body */}
-            <div style={{ padding: '26px 32px 30px' }}>
-              <p style={{ fontSize: 13.5, color: C.stone, lineHeight: 1.7, marginBottom: 20, fontWeight: 400 }}>
-                Join the Fashion Heritage community to receive updates on premium sarees, traditional handlooms, new launches, and exclusive member discounts.
+            {/* Content Section */}
+            <div className="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 600, color: C.soil, lineHeight: 1.2, margin: '0 0 12px' }}>
+                Discover The <br/>
+                <span style={{ fontStyle: 'italic', color: C.accent }}>Art of Weaving</span>
+              </h3>
+              
+              <p style={{ fontSize: 14, color: C.stone, lineHeight: 1.7, marginBottom: 24, fontWeight: 400 }}>
+                Experience the finest quality fabrics, curated to bring elegance, comfort and tradition to your life. Discover India's finest collections of premium royal silks and handloom weaves.
               </p>
 
-              {/* Stars */}
-              <div style={{ display: 'flex', gap: 3, marginBottom: 20 }}>
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} size={13} fill="#b56b46" stroke="none" />
-                ))}
-                <span style={{ fontSize: 11.5, color: C.stone, marginLeft: 6, fontWeight: 500 }}>
-                  Trusted by 25,000+ textile patrons
-                </span>
-              </div>
-
-              {subscribed ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  style={{
-                    background: '#e8eee5',
-                    border: '1px solid #1c4442',
-                    borderRadius: 14,
-                    padding: '20px',
-                    textAlign: 'center',
-                    color: '#1c4442',
-                    fontWeight: 600,
-                  }}
-                >
-                  Thank you! You've subscribed successfully.
-                  <span style={{ display: 'block', fontSize: 12, color: C.stone, marginTop: 4, fontWeight: 400 }}>
-                    Use code <strong style={{ color: '#b56b46' }}>HERITAGE10</strong> at check-out.
-                  </span>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="space-y-4">
-                  {/* Offer coupon banner */}
-                  <div style={{
-                    background: C.sand,
-                    border: `1.5px dashed ${C.accent}`,
-                    borderRadius: 14,
-                    padding: '12px 16px',
-                    textAlign: 'center',
-                  }}>
-                    <span style={{ fontSize: 16, fontWeight: 600, color: C.primary, display: 'block' }}>
-                      Get 10% Off Your First Order
-                    </span>
-                    <span style={{ fontSize: 11, color: C.stone, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'block', marginTop: 2 }}>
-                      Discount Code: <strong style={{ color: C.accent }}>HERITAGE10</strong>
-                    </span>
-                  </div>
-
-                  {/* Input and button */}
-                  <div className="flex flex-col gap-2">
-                    <input
-                      type="email"
-                      required
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={e => setEmail(e.target.value)}
-                      style={{
-                        padding: '12px 16px',
-                        borderRadius: 12,
-                        border: `1.5px solid ${C.border}`,
-                        outline: 'none',
-                        fontSize: 13,
-                        background: '#fff',
-                        width: '100%',
-                      }}
-                    />
-                    <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-                      <button
-                        type="submit"
-                        style={{
-                          flex: 2, padding: '12px 16px',
-                          background: C.primary, color: 'white',
-                          border: 'none', borderRadius: 12,
-                          fontSize: 13, fontWeight: 600,
-                          cursor: 'pointer', display: 'flex',
-                          alignItems: 'center', justifyContent: 'center', gap: 6,
-                          fontFamily: "'DM Sans', sans-serif",
-                          transition: 'all 0.2s ease',
-                        }}
-                        onMouseEnter={e => e.currentTarget.style.background = C.accent}
-                        onMouseLeave={e => e.currentTarget.style.background = C.primary}
-                      >
-                        Subscribe Now <ArrowRight size={14} />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => { setIsOpen(false); navigate('/products'); }}
-                        style={{
-                          flex: 1, padding: '12px 16px',
-                          background: 'transparent',
-                          color: C.stone,
-                          border: `1.5px solid ${C.border}`,
-                          borderRadius: 12,
-                          fontSize: 13, fontWeight: 500,
-                          cursor: 'pointer',
-                          fontFamily: "'DM Sans', sans-serif",
-                        }}
-                      >
-                        Later
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              )}
+              <button
+                onClick={() => { setIsOpen(false); navigate('/products'); }}
+                style={{
+                  width: '100%', padding: '14px 18px',
+                  background: C.primary, color: 'white',
+                  border: 'none', borderRadius: 12,
+                  fontSize: 14, fontWeight: 500,
+                  cursor: 'pointer', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center', gap: 8,
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = C.accent}
+                onMouseLeave={e => e.currentTarget.style.background = C.primary}
+              >
+                Explore Collections <ArrowRight size={16} />
+              </button>
             </div>
           </motion.div>
         </div>

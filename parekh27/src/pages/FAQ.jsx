@@ -51,7 +51,7 @@ export default function FAQ() {
 
       
 
-      <div className="max-w-3xl mx-auto px-6 pt-32 pb-24">
+      <div className="max-w-3xl mx-auto px-6 pt-16 md:pt-32 pb-24">
 
         {/* Page Title Section */}
         <div className="text-center mb-12">
