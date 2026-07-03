@@ -65,7 +65,7 @@ export default function About() {
               }}
             >
               <img
-                src="/images/about.png"
+                src="https://images.pexels.com/photos/8886953/pexels-photo-8886953.jpeg"
                 alt="Indian Fabric House Artisans & Textiles"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
               />

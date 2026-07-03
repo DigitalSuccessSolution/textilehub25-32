@@ -48,9 +48,9 @@ export default function Navbar() {
     { name: 'e-Quotation', path: '/e-quotation' },
     { name: 'e-Auction', path: '/e-auction' },
     { name: 'Trade Circular', path: '/trade-circular' },
-    { name: 'Blog Page', path: '/blog' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Notice Board', path: '/notice-board' },
-    { name: 'Career Page', path: '/career' },
+    { name: 'Career', path: '/career' },
     { name: 'Customer Review', path: '/reviews' },
     { name: 'Business Media Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' },
@@ -83,8 +83,10 @@ export default function Navbar() {
       <div
         className={`w-full transition-all duration-300 ${scrolled ? 'py-2.5 shadow-sm' : 'py-3.5'}`}
         style={{
-          background: scrolled ? 'rgba(250, 248, 245, 0.98)' : '#faf8f5',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
+          position: 'relative',
+          zIndex: 50,
+          background: isOpen ? '#faf8f5' : (scrolled ? 'rgba(250, 248, 245, 0.98)' : '#faf8f5'),
+          backdropFilter: scrolled && !isOpen ? 'blur(12px)' : 'none',
           borderBottom: `1px solid ${C.border}`,
         }}
       >
@@ -208,109 +210,102 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      {isOpen && (
-        <div
-          className="md:hidden fixed inset-0 top-[60px] z-40 flex flex-col"
-          style={{ background: '#faf8f5', fontFamily: "'Outfit', sans-serif" }}
-        >
-          <div className="h-[2px] w-full" style={{ background: `linear-gradient(90deg, ${C.primary}, ${C.accent}, ${C.primary})` }} />
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ y: '-100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100%' }}
+            transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+            className="md:hidden fixed inset-0 z-40 flex flex-col"
+            style={{ background: '#faf8f5', fontFamily: "'Outfit', sans-serif" }}
+          >
+            <div className="flex-1 overflow-y-auto px-5 pt-[85px] pb-28 space-y-2">
+              <div className="grid grid-cols-1 gap-1.5">
+                {directNavItems.map((item) => {
+                  const active = isItemActive(item);
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-bold tracking-wide border transition-all uppercase"
+                      style={{
+                        background: active ? 'rgba(176,87,66,0.05)' : '#ffffff',
+                        borderColor: active ? C.accent : C.border,
+                        color: active ? C.accent : C.soil,
+                      }}
+                    >
+                      <span>{item.name}</span>
+                      {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.accent }} />}
+                    </Link>
+                  );
+                })}
 
-          <div className="flex-1 overflow-y-auto px-5 py-6 pb-28 space-y-2">
-            <div className="px-3 mb-4 pb-4" style={{ borderBottom: `1px solid ${C.border}` }}>
-              <p className="font-bold text-xl" style={{ color: C.soil, fontFamily: "'Cormorant Garamond', serif" }}>
-                Indian Fabric House
-              </p>
-              <p className="text-[9px] tracking-wider uppercase mt-1 font-semibold text-accent" style={{ color: C.accent }}>
-                Premium Textile & Retail Mall
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-1.5">
-              {directNavItems.map((item) => {
-                const active = isItemActive(item);
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-bold tracking-wide border transition-all uppercase"
+                {/* Mobile Accordion Dropdown for Pages */}
+                <div className="w-full">
+                  <button
+                    onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                    className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-bold uppercase tracking-wide border transition-all cursor-pointer"
                     style={{
-                      background: active ? 'rgba(176,87,66,0.05)' : '#ffffff',
-                      borderColor: active ? C.accent : C.border,
-                      color: active ? C.accent : C.soil,
+                      background: '#ffffff',
+                      borderColor: isDropdownActive() ? C.accent : C.border,
+                      color: isDropdownActive() ? C.accent : C.soil,
                     }}
                   >
-                    <span>{item.name}</span>
-                    {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.accent }} />}
-                  </Link>
-                );
-              })}
+                    <span>Pages</span>
+                    <ChevronDown size={14} className={`transition-transform duration-200 ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
+                  </button>
 
-              {/* Mobile Accordion Dropdown for Pages */}
-              <div className="w-full">
-                <button
-                  onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-                  className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-bold uppercase tracking-wide border transition-all cursor-pointer"
-                  style={{
-                    background: '#ffffff',
-                    borderColor: isDropdownActive() ? C.accent : C.border,
-                    color: isDropdownActive() ? C.accent : C.soil,
-                  }}
-                >
-                  <span>Pages</span>
-                  <ChevronDown size={14} className={`transition-transform duration-200 ${mobileResourcesOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {mobileResourcesOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      className="overflow-hidden mt-1.5 space-y-1.5 pl-3"
-                    >
-                      {dropdownNavItems.map((item) => {
-                        const active = isItemActive(item);
-                        return (
-                          <Link
-                            key={item.name}
-                            to={item.path}
-                            onClick={() => {
-                              setIsOpen(false);
-                              setMobileResourcesOpen(false);
-                            }}
-                            className="flex items-center justify-between px-4 py-2.5 rounded-xl text-[12px] font-bold uppercase tracking-wide border transition-all"
-                            style={{
-                              background: active ? 'rgba(176,87,66,0.03)' : '#ffffff',
-                              borderColor: active ? C.accent : C.border,
-                              color: active ? C.accent : C.soil,
-                            }}
-                          >
-                            <span>{item.name}</span>
-                            {active && <span className="w-1.5 h-1.5 rounded-full" style={{ background: C.accent }} />}
-                          </Link>
-                        );
-                      })}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                  <AnimatePresence initial={false}>
+                    {mobileResourcesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: 'easeInOut' }}
+                        className="grid grid-cols-2 gap-2 mt-2 pl-3"
+                      >
+                        {dropdownNavItems.map((item) => {
+                          const active = isItemActive(item);
+                          return (
+                            <Link
+                              key={item.name}
+                              to={item.path}
+                              onClick={() => {
+                                setIsOpen(false);
+                                setMobileResourcesOpen(false);
+                              }}
+                              className="flex items-center justify-between px-3 py-2 border rounded-xl text-[11px] font-bold tracking-wide transition-all uppercase"
+                              style={{
+                                background: active ? 'rgba(176,87,66,0.03)' : '#ffffff',
+                                borderColor: active ? C.accent : C.border,
+                                color: active ? C.accent : C.soil,
+                              }}
+                            >
+                              <span>
+                                {item.name.startsWith('e-') ? (
+                                  <>
+                                    <span style={{ textTransform: 'lowercase' }}>e</span>
+                                    <span>{item.name.slice(1)}</span>
+                                  </>
+                                ) : (
+                                  item.name
+                                )}
+                              </span>
+                              {active && <span className="w-1.5 h-1.5 rounded-full shrink-0 ml-1" style={{ background: C.accent }} />}
+                            </Link>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
-
-            <div className="pt-4">
-              <Link
-                to="/contact"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-2 py-3 rounded-full text-sm font-bold uppercase tracking-wider text-white"
-                style={{ background: C.primary }}
-              >
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

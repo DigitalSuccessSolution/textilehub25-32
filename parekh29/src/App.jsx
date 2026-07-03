@@ -88,32 +88,16 @@ function WelcomePopup() {
               boxShadow: '0 32px 80px rgba(34, 43, 32, 0.18)',
             }}
           >
-            {/* Left Column (Creative Background Cover) - visible on md+ */}
-            <div className="hidden md:block md:col-span-5 relative h-full min-h-[340px] bg-stone-100 border-r" style={{ borderColor: C.border }}>
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(135deg, #475643 0%, #384535 100%)',
-                }}
+            {/* Left Column (Image) - visible on all screen sizes */}
+            <div className="col-span-1 md:col-span-5 relative h-[180px] md:h-auto md:min-h-[340px] bg-stone-100 border-b md:border-b-0 md:border-r" style={{ borderColor: C.border }}>
+              <img
+                src="https://images.pexels.com/photos/5531709/pexels-photo-5531709.jpeg"
+                alt="Welcome to Indian Fabric House"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              {/* Pattern watermark */}
-              <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1.5px, transparent 1.5px)', backgroundSize: '16px 16px' }} />
-              
-              <div className="absolute inset-0 flex flex-col justify-between p-6 text-left">
-                <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center">
-                  <span className="text-white text-xs font-bold font-display">IFH</span>
-                </div>
-                <div>
-                  <span className="text-white/60 text-[9px] font-bold tracking-[0.2em] uppercase">Special Offer</span>
-                  <h4 className="text-white text-xl font-bold leading-tight mt-1" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                    Heritage Weaves
-                  </h4>
-                  <p className="text-white/80 text-[11px] mt-1 leading-relaxed">Crafted with tradition, designed for modern living.</p>
-                </div>
-              </div>
             </div>
 
-            {/* Right Column (Message & Code Details) */}
+            {/* Right Column (Message Details) */}
             <div className="col-span-1 md:col-span-7 p-6 sm:p-8 flex flex-col justify-center text-left relative">
               
               {/* Close button */}
@@ -129,43 +113,15 @@ function WelcomePopup() {
                 <X size={15} />
               </button>
 
-              {/* Tag */}
-              <div className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full mb-3 border"
-                style={{
-                  background: 'rgba(176, 87, 66, 0.06)',
-                  borderColor: 'rgba(176, 87, 66, 0.15)',
-                }}
-              >
-                <Tag size={11} style={{ color: C.accent }} />
-                <span style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase', color: C.accent, fontWeight: 700 }}>
-                  Welcome Gift
-                </span>
-              </div>
-
               {/* Title */}
               <h3 className="text-2xl sm:text-3xl font-bold mb-3 leading-tight" style={{ fontFamily: "'Cormorant Garamond', serif", color: C.soil }}>
-                Indian Fabric House<br />
-                <span style={{ fontStyle: 'italic', color: C.accent, fontWeight: 500 }}>Timeless Elegance</span>
+                Welcome to<br />
+                <span style={{ fontStyle: 'italic', color: C.accent, fontWeight: 500 }}>Indian Fabric House</span>
               </h3>
 
-              <p className="text-xs sm:text-[13px] leading-relaxed mb-5" style={{ color: C.stone }}>
-                Discover India's largest and most trusted textile collection. To celebrate your first visit, enjoy a special discount on premium fabrics.
+              <p className="text-xs sm:text-[13px] leading-relaxed mb-6" style={{ color: C.stone }}>
+                Discover India's largest and most trusted textile collection. Explore our premium fabrics, heritage sarees, and luxury home linen crafted directly in collaboration with master artisans.
               </p>
-
-              {/* Offer Code Card */}
-              <div className="rounded-2xl p-4 text-center border border-dashed mb-6"
-                style={{
-                  background: 'rgba(71, 86, 67, 0.03)',
-                  borderColor: C.accent,
-                }}
-              >
-                <span className="text-[13px] font-bold block" style={{ color: C.soil }}>
-                  FLAT 10% OFF YOUR FIRST ORDER
-                </span>
-                <div className="inline-block mt-2 px-4 py-1.5 bg-[#475643] text-white rounded-lg text-xs font-mono tracking-wider font-bold">
-                  WELCOME10
-                </div>
-              </div>
 
               {/* Action Buttons */}
               <div className="flex gap-2.5">

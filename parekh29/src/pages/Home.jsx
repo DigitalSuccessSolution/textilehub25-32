@@ -54,7 +54,7 @@ const heroSlides = [
     titleLine1: "Elegance Woven",
     titleLine2: "Into Every Thread.",
     subtitle: "Premium Indian ethnic wear fabrics crafted with generations of artisan tradition.",
-    image: "https://images.unsplash.com/photo-1727784891998-5adcdb7cd8e7?q=80&w=1460&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "https://images.pexels.com/photos/8886955/pexels-photo-8886955.jpeg",
     cta: "Explore Collections",
     path: "/products"
   },
@@ -62,7 +62,7 @@ const heroSlides = [
     titleLine1: "Luxury for Your",
     titleLine2: "Home & Living.",
     subtitle: "Premium cotton bedsheets, linen and home textiles that transform your living space.",
-    image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=1600&q=85&fit=crop",
+    image: "https://images.pexels.com/photos/11899139/pexels-photo-11899139.jpeg",
     cta: "Shop Home Textiles",
     path: "/products?category=Bedsheets & Linen"
   },
@@ -70,7 +70,7 @@ const heroSlides = [
     titleLine1: "Vibrant Colors",
     titleLine2: "For Little Ones.",
     subtitle: "Soft, safe & colorful fabrics for children's clothing — comfort that parents trust.",
-    image: "https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?w=1600&q=85&fit=crop",
+    image: "https://images.pexels.com/photos/5864245/pexels-photo-5864245.jpeg",
     cta: "View Kids Collection",
     path: "/products?category=Hosiery Items"
   }
@@ -119,7 +119,7 @@ export default function Home() {
       {/* ── 1. HERO SECTION CAROUSEL (Rounded card style) ── */}
       <section className="relative px-4 sm:px-6 lg:px-14 py-2 mt-1">
         <div 
-          className="max-w-[90rem] mx-auto rounded-[24px] md:rounded-[32px] overflow-hidden relative shadow-sm border h-[360px] sm:h-[420px] md:h-[460px] lg:h-[490px]"
+          className="max-w-[90rem] mx-auto rounded-[24px] md:rounded-[32px] overflow-hidden relative shadow-sm border h-[310px] sm:h-[420px] md:h-[460px] lg:h-[490px]"
           style={{ 
             borderColor: C.border
           }}
@@ -218,17 +218,17 @@ export default function Home() {
           {/* Left Arrow Button */}
           <button 
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white flex items-center justify-center text-[#222b20] transition-colors border border-white/20 z-20 cursor-pointer shadow-sm"
+            className="absolute left-1 md:left-4 top-1/2 -translate-y-1/2 w-7 h-7 md:w-10 md:h-10 rounded-full bg-white/70 hover:bg-white flex items-center justify-center text-[#222b20] transition-colors border border-white/20 z-20 cursor-pointer shadow-sm"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
           </button>
 
           {/* Right Arrow Button */}
           <button 
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/70 hover:bg-white flex items-center justify-center text-[#222b20] transition-colors border border-white/20 z-20 cursor-pointer shadow-sm"
+            className="absolute right-1 md:right-4 top-1/2 -translate-y-1/2 w-7 h-7 md:w-10 md:h-10 rounded-full bg-white/70 hover:bg-white flex items-center justify-center text-[#222b20] transition-colors border border-white/20 z-20 cursor-pointer shadow-sm"
           >
-            <ChevronRight size={20} />
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         </div>
 
@@ -299,7 +299,7 @@ export default function Home() {
           </div>
 
           {/* Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
             {popularCollections.map((col, idx) => (
               <Link 
                 key={idx}
@@ -480,8 +480,24 @@ export default function Home() {
           {/* Left Block (Intro & Illustration) */}
           <div 
             className="lg:col-span-5 text-left p-8 sm:p-10 rounded-[24px] border shadow-sm relative overflow-hidden flex flex-col justify-between"
-            style={{ background: 'linear-gradient(135deg, #fbf9f6 0%, #efebdf 100%)', borderColor: C.border, minHeight: '380px' }}
+            style={{ borderColor: C.border, minHeight: '380px' }}
           >
+            {/* Background Image Container */}
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="/images/about_pampas.png" 
+                alt="Background texture" 
+                className="w-full h-full object-cover"
+              />
+              {/* Soft overlay to ensure high text contrast */}
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(251, 249, 246, 0.90) 0%, rgba(239, 235, 223, 0.80) 100%)'
+                }}
+              />
+            </div>
+
             <div className="relative z-10">
               <span className="text-[11.5px] font-bold tracking-widest uppercase block" style={{ color: C.accent }}>
                 WHY INDIAN FABRIC HOUSE?
@@ -502,15 +518,6 @@ export default function Home() {
               >
                 About Us
               </Link>
-            </div>
-
-            {/* Floating Grass vase illustration layered behind or bottom-right */}
-            <div className="absolute right-0 bottom-0 w-36 h-48 opacity-25 lg:opacity-40 pointer-events-none z-0">
-              <img 
-                src="/images/about_pampas.png" 
-                alt="Vase illustration" 
-                className="w-full h-full object-contain object-bottom"
-              />
             </div>
           </div>
 

@@ -70,7 +70,7 @@ const FloatingChatbot = () => {
                 style={{ borderColor: C.border }}
               >
                 <p className="text-[13px] leading-relaxed" style={{ color: C.soil }}>
-                  Namaste! 🙏 Welcome to <strong>Textile Treasure</strong>. How can I assist you today?
+                  Hello! 🙏 Welcome to <strong>Textile Treasure</strong>. How can I assist you today?
                 </p>
               </div>
             </div>

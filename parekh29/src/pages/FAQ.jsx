@@ -93,7 +93,7 @@ export default function FAQ() {
                   </h3>
                   <div style={{
                     flexShrink: 0, width: 32, height: 32, borderRadius: '50%',
-                    display: 'flex', alignItems: 'center', justify: 'center',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
                     background: isOpen ? C.primary : 'rgba(71, 86, 67,0.08)',
                     border: `1.5px solid ${isOpen ? C.primary : C.border}`,
                     transition: 'all 0.2s ease',

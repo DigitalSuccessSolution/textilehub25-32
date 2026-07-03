@@ -125,7 +125,7 @@ export default function TradeEnquiry() {
                 type="submit"
                 style={{
                   width: '100%', padding: '14px',
-                  display: 'flex', alignItems: 'center', justify: 'center', gap: 8,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   background: C.soil, color: 'white',
                   border: 'none', borderRadius: 12,
                   fontSize: 14, fontWeight: 500,

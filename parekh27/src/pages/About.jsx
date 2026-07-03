@@ -72,7 +72,7 @@ export default function About() {
               className="aspect-square overflow-hidden bg-stone-100"
             >
               <img
-                src="https://images.pexels.com/photos/8386668/pexels-photo-8386668.jpeg"
+                src="https://images.pexels.com/photos/5264914/pexels-photo-5264914.jpeg"
                 alt="Fashion Heritage Artisans & Textiles"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]"
               />
